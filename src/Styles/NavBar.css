@@ -1,0 +1,30 @@
+.NavBar {
+    display: flex;
+    flex-direction: row;
+    /* align-items: end; */
+    justify-content: end;
+    background-color: rgb(14, 14, 14);
+    width: 100%;
+    position: fixed; 
+    top: 0;         
+    left: 0;        
+    padding: 10px;
+    z-index: 1;
+    border-bottom: 1px rgb(255, 255, 255) solid;
+  }
+  
+  .NavBar a {
+    color: rgb(226, 226, 226);
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.NavBar a:hover {
+    color: #9fffe7;
+    transform: scale(1.1);
+    
+}
+
+
+ 
