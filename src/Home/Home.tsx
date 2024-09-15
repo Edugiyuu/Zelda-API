@@ -1,28 +1,21 @@
 
 import { useEffect, useState } from 'react';
 import '../Styles/Home.css'
+import { Link } from 'react-router-dom';
 const Home = () => {
 var [verdade, setVerdade] = useState(true)
 
     function handleButtonClick() {
         console.log(verdade); 
     }
-    useEffect(() => {
-        fetch(`https://zelda.fanapis.com/api/games`)
-            .then((response) => response.json())
-            .then((parsedResponse) => {
-
-                console.log(parsedResponse);
-                
-            })
-    }, []);
+    
     return (
         
         <div className='Home'>
             <div className='TitlesAndMore'>
-                <h1>The Legend of Zelda</h1>
+                <h1>The Legend of Zelda API</h1>
                 <p>bla bla bla bla bla bla bla bla bla</p>
-                <button onClick={handleButtonClick}>Ver Mais</button>
+                <Link to={'/more'} onClick={handleButtonClick}>Ver Mais</Link>
             </div>
             
         </div>

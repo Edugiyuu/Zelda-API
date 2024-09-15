@@ -3,6 +3,7 @@ import './App.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import NavBar from "./NavBar/NavBar";
 import SeeMore from "./Routes/SeeMore";
+import Games from "./Routes/Games";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
 
         <Route path="/" element={<Home />} />
         <Route path="/more" element={<SeeMore />} />
+        <Route path="/games" element={<Games />} />
         {/* <Route path="pokemon/type/:type" element={<TypeInfo/>}/>
        <Route path="pokemon/favorites" element={<Favorites/>}/> */}
 

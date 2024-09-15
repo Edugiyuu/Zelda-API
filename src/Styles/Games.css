@@ -1,0 +1,29 @@
+
+.AllGames {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centraliza os cards */
+    gap: 20px; /* Espaçamento entre os cards */
+    padding: 20px;
+}
+.GameCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    width: 350px;
+    
+    border: 2px solid rgb(32, 32, 32);
+    padding: 20px;
+}
+
+.GameCard a{
+    background-color: rgb(56, 179, 39);
+    color: white;
+    border: 1px solid white;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 40px;
+    font-size: 15px;
+}
