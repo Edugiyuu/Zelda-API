@@ -2,10 +2,11 @@
     display: flex;
     flex-direction: row;
     /* align-items: end; */
-    justify-content: end;
-    background-color: rgb(14, 14, 14);
-    width: 100%;
-    position: fixed; 
+    justify-content: space-between;
+    background-color: rgb(24, 24, 24);
+    /* background-image: url('../Imgs/Bg/ZeldaHome1.jpg');
+    background-size: cover; 
+    background-position: center; */
     top: 0;         
     left: 0;        
     padding: 10px;
@@ -20,11 +21,14 @@
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
+
 .NavBar a:hover {
     color: #9fffe7;
     transform: scale(1.1);
     
 }
 
-
+.NavBar img{
+  margin-left: 10px;
+}
  

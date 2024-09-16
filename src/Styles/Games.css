@@ -1,3 +1,7 @@
+.GameTitle{
+    text-align: center;
+    margin: 60px;
+}
 
 .AllGames {
     display: flex;
@@ -10,10 +14,15 @@
     display: flex;
     flex-direction: column;
     justify-content: end;
-    width: 350px;
-    
-    border: 2px solid rgb(32, 32, 32);
+    align-items: center;
+    width: 330px;
+    text-align: center;
+    border-right: 1px #7f8c8d solid;
+    border-bottom: 1px #7f8c8d solid;
+    border-radius: 10px;
     padding: 20px;
+    gap: 10px;
+    color: #515555;
 }
 
 .GameCard a{
@@ -26,4 +35,7 @@
     padding-bottom: 15px;
     border-radius: 40px;
     font-size: 15px;
+}
+.GameCard img{
+    
 }
