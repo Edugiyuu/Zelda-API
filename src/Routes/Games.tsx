@@ -20,7 +20,11 @@ interface WikiPage {
 /* interface WikiResponse {
     numerosaqui?: WikiPage; 
 } */
-/* https://zelda.fandom.com/api.php?action=query&titles=The%20Legend%20of%20Zelda&prop=images&format=json */
+
+/* 
+   1- https://zelda.fandom.com/api.php?action=query&titles=The%20Legend%20of%20Zelda&prop=images&format=json
+   2- https://zelda.fandom.com/api.php?action=query&titles=File:LoZ%20International%20Logo.png&prop=imageinfo&iiprop=url&format=json
+*/
 
 const Games = () => {
     var [games, setGames] = useState<Games[]>([])
@@ -60,7 +64,7 @@ const Games = () => {
                     <div key={game.id} className="GameCard">
                         <h2>{game.name}</h2>
                         <p>{game.released_date}</p>
-                        <img style={{width:'200px'}} src="https://static.wikia.nocookie.net/zelda_gamepedia_en/images/4/4c/TotK_English_Logo.png" alt="" />
+                        <img style={{width:'150px'}} src="https://static.wikia.nocookie.net/zelda_gamepedia_en/images/4/4c/TotK_English_Logo.png" alt="" />
                         <Link className="GameCardLink" to={""}>See Game</Link>
                         
                     </div>

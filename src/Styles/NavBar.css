@@ -3,19 +3,19 @@
     flex-direction: row;
     /* align-items: end; */
     justify-content: space-between;
-    background-color: rgb(24, 24, 24);
-    /* background-image: url('../Imgs/Bg/ZeldaHome1.jpg');
-    background-size: cover; 
-    background-position: center; */
+    background-color: rgb(17, 17, 17);
+  /*   background-image: url('../Imgs/Bg/NavBar1.png');
+    background-repeat: repeat;
+    background-size: 290px; */
     top: 0;         
     left: 0;        
     padding: 10px;
     z-index: 1;
-    border-bottom: 1px rgb(255, 255, 255) solid;
+    border-bottom: 1px rgb(0, 0, 0) solid;
   }
   
   .NavBar a {
-    color: rgb(226, 226, 226);
+    color: rgb(255, 255, 255);
     text-decoration: none;
     padding: 10px 15px;
     transition: color 0.3s ease, transform 0.3s ease;

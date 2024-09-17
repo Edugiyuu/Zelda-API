@@ -23,10 +23,13 @@
     padding: 20px;
     gap: 10px;
     color: #515555;
+    box-shadow: 1px 1px 2px;
+    transition: 0.2s ease;
+    background-color: rgb(255, 255, 255);
 }
 
 .GameCard a{
-    background-color: rgb(56, 179, 39);
+    background-color: rgb(44, 171, 180);
     color: white;
     border: 1px solid white;
     padding-left: 40px;
@@ -35,7 +38,9 @@
     padding-bottom: 15px;
     border-radius: 40px;
     font-size: 15px;
-}
-.GameCard img{
     
 }
+.GameCard:hover {
+    transform: scale(1.05);
+    
+  }

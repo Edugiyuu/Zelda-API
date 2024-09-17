@@ -7,7 +7,6 @@ const Home = () => {
 
     return (
         <div>
-      
        
         <div className='Home'>
             <div className='TitlesAndMore'>
@@ -15,8 +14,7 @@ const Home = () => {
                 <p>bla bla bla bla bla bla bla bla bla</p>
                 <Link to={'/more'}>See more</Link>
             </div>
-            
-     
+        
         </div>
 
         </div>
