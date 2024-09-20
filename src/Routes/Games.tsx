@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import '../Styles/Games.css'
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 interface Games {
     id: 'string'
@@ -31,7 +32,7 @@ const Games = () => {
     var [wikiImgs, setWikiImgs] = useState<WikiPage[]>([])
    
     useEffect(() => {
-        fetch(`https://zelda.fanapis.com/api/games`)
+        fetch(`https://zelda.fanapis.com/api/games?limit=100`)
             .then((response) => response.json())
             .then((parsedResponse) => {
                 console.log(parsedResponse.data);
@@ -40,18 +41,39 @@ const Games = () => {
             })
     }, []);
 
-    useEffect(() => {       
-        for (let i = 0; i < games.length; i++) {
-            console.log(games[i].name);
-            fetch(`/zeldaFandom/api.php?action=query&titles=${games[i].name}&prop=images&format=json`)
+    /* useEffect(() => {
+    for (let i = 0; i < games.length; i++) {
+        console.log(games[i].name);
+        fetch(`/zeldaFandom/api.php?action=query&titles=${games[i].name}&prop=images&format=json`)
             .then((response) => response.json())
             .then((parsedResponse) => {
-                console.log(parsedResponse.query.pages);
-
+                const pages = parsedResponse.query.pages;
+                const pageId = Object.keys(pages)[0];
+                var arrayDeImgs = []
+                arrayDeImgs.push(pages[pageId].images);
+                setWikiImgs(arrayDeImgs)
+                console.log(wikiImgs);
             })
             .catch((error) => console.error(error));
-        }  
-    }, []);
+    }
+}, []); */
+
+
+
+useEffect(() => {
+    console.log(wikiImgs); 
+}, [wikiImgs]);
+
+useEffect(() => {
+    axios.get('zeldaFandom/api.php?action=query&titles=File:BotW_English_Logo.png&prop=imageinfo&iiprop=url&format=json')
+  .then(response => {
+    console.log(response.data);
+  }, error => {
+    console.log(error);
+  });
+}, []);
+
+
     
 
     return (
@@ -64,7 +86,11 @@ const Games = () => {
                     <div key={game.id} className="GameCard">
                         <h2>{game.name}</h2>
                         <p>{game.released_date}</p>
-                        <img style={{width:'150px'}} src="https://static.wikia.nocookie.net/zelda_gamepedia_en/images/4/4c/TotK_English_Logo.png" alt="" />
+                        <img 
+                        style={{width:'150px'}} 
+                        src={`/GameIcons/${game.name.replace(/:/g, '')}.png`} 
+                        
+                    />
                         <Link className="GameCardLink" to={""}>See Game</Link>
                         
                     </div>

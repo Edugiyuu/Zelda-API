@@ -13,3 +13,4 @@ export default defineConfig({
     },
   },
 })
+/* https://zelda.fandom.com/api.php?action=query&titles=File:BotW_English_Logo.png&prop=imageinfo&iiprop=url&format=json */
