@@ -5,6 +5,7 @@ import NavBar from "./NavBar/NavBar";
 import SeeMore from "./Routes/SeeMore";
 import Games from "./Routes/Games";
 import Characters from "./Routes/Characters";
+import Game from "./Routes/Game";
 
 function App() {
 
@@ -22,8 +23,8 @@ function App() {
         <Route path="/more" element={<SeeMore />} />
         <Route path="/games" element={<Games />} />
         <Route path="/characters" element={<Characters />} />
-        {/* <Route path="pokemon/type/:type" element={<TypeInfo/>}/>
-       <Route path="pokemon/favorites" element={<Favorites/>}/> */}
+        <Route path="/games/:game_id" element={<Game/>}/>
+      
 
       </Routes>
 

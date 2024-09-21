@@ -4,23 +4,10 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 interface Games {
-    id: 'string'
-    name: 'string'
-    released_date: 'string'
+    id: string
+    name: string
+    released_date: string
 }
-interface Image {
-    ns: number;
-    title: string;
-}
-interface WikiPage {
-    pageid: number;
-    title: string;
-    images: Image[];
-}
-
-/* interface WikiResponse {
-    numerosaqui?: WikiPage; 
-} */
 
 /* 
    1- https://zelda.fandom.com/api.php?action=query&titles=The%20Legend%20of%20Zelda&prop=images&format=json
@@ -29,7 +16,7 @@ interface WikiPage {
 
 const Games = () => {
     var [games, setGames] = useState<Games[]>([])
-    var [wikiImgs, setWikiImgs] = useState<WikiPage[]>([])
+   
    
     useEffect(() => {
         fetch(`https://zelda.fanapis.com/api/games?limit=100`)
@@ -40,29 +27,6 @@ const Games = () => {
                 
             })
     }, []);
-
-    /* useEffect(() => {
-    for (let i = 0; i < games.length; i++) {
-        console.log(games[i].name);
-        fetch(`/zeldaFandom/api.php?action=query&titles=${games[i].name}&prop=images&format=json`)
-            .then((response) => response.json())
-            .then((parsedResponse) => {
-                const pages = parsedResponse.query.pages;
-                const pageId = Object.keys(pages)[0];
-                var arrayDeImgs = []
-                arrayDeImgs.push(pages[pageId].images);
-                setWikiImgs(arrayDeImgs)
-                console.log(wikiImgs);
-            })
-            .catch((error) => console.error(error));
-    }
-}, []); */
-
-
-
-useEffect(() => {
-    console.log(wikiImgs); 
-}, [wikiImgs]);
 
 useEffect(() => {
     axios.get('zeldaFandom/api.php?action=query&titles=File:BotW_English_Logo.png&prop=imageinfo&iiprop=url&format=json')
@@ -91,7 +55,7 @@ useEffect(() => {
                         src={`/GameIcons/${game.name.replace(/:/g, '')}.png`} 
                         
                     />
-                        <Link className="GameCardLink" to={""}>See Game</Link>
+                        <Link className="GameCardLink" to={`/games/${game.id}`}>See Game</Link>
                         
                     </div>
                 ))}
