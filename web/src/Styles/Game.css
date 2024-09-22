@@ -1,0 +1,37 @@
+.GameInfo {
+    display: flex;
+    justify-content: center;
+   
+}
+
+.GameImgs {
+    margin-top: 30px;
+    display: flex;
+    max-width: 400px;
+    width: 10000px;
+    perspective: 600px; 
+    flex-direction: column;
+    align-items: center;
+    gap: 23px;
+    
+}
+
+.GameTitleLogo{
+    width: 300px;
+    
+}
+.BoxArt{
+    width: 200px;
+    transform-style: preserve-3d; 
+    animation: rotate3D 3s infinite linear;
+    border-radius: 5px;
+}
+
+@keyframes rotate3D {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
