@@ -1,37 +1,67 @@
 .GameInfo {
     display: flex;
     justify-content: center;
-   
+    align-items: center;
 }
 
 .GameImgs {
-    margin-top: 30px;
+
     display: flex;
     max-width: 400px;
     width: 10000px;
-    perspective: 600px; 
+    perspective: 600px;
     flex-direction: column;
     align-items: center;
-    gap: 23px;
+    gap: 50px;
+    margin-left: 20px;
+    border-radius: 20px;
     
 }
 
-.GameTitleLogo{
-    width: 300px;
-    
+.GameTitleLogo {
+    max-width: 200px;
 }
-.BoxArt{
-    width: 200px;
-    transform-style: preserve-3d; 
-    animation: rotate3D 3s infinite linear;
+
+.BoxArt {
+    width: 225px;
+    transform-style: preserve-3d;
+    animation: rotate3D 4s infinite linear;
     border-radius: 5px;
+    box-shadow: 0 0 30px 0px rgba(0, 0, 0, 0.363); /* Brilho suave inicial */
+    transition: box-shadow 0.3s ease-in-out; /* Transição suave ao hover */
+   
 }
 
 @keyframes rotate3D {
     0% {
         transform: rotateY(0deg);
     }
+
     100% {
         transform: rotateY(360deg);
     }
+}
+
+.About {
+    display: flex;
+    margin: 20px;
+    flex-direction: column;
+
+    justify-items: center;
+    padding: 20px;
+    background-color: rgb(252, 252, 252);
+    color: rgb(0, 0, 0);
+    border-radius: 20px;
+    box-shadow: 0px 1px 2px 0px #7f8c8d;
+    color: #515555;
+
+}
+.CoolBar{
+    background-color: #d9e2db8e;
+    width: 20px;
+   
+    height: 100vh;
+    margin-left: 20px;
+    margin-right: 40px;
+    
 }

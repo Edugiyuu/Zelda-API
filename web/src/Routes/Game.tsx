@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import '../Styles/Game.css'
+import ColorLink from '../Imgs/Characters/ColorLink.png'
 
 interface Game {
     name: string,
@@ -9,11 +10,14 @@ interface Game {
     description: string,
     publisher: string,
     released_date: string
+    game_title_img?: string
+    box_img?: string
 }
 
 const Game = () => {
     const params = useParams();
     var [game, setGame] = useState<Game>()
+    var [newGame, setNewGame] = useState<Game>()
 
     useEffect(() => {
         fetch(`https://zelda.fanapis.com/api/games/${params.game_id}`)
@@ -24,22 +28,37 @@ const Game = () => {
 
             })
     }, []);
+    useEffect(() => {
+        fetch(`http://localhost:3000/games/${params.game_id}`)
+            .then((response) => response.json())
+            .then((parsedResponse) => {
+                console.log(parsedResponse);
+                setNewGame(parsedResponse)
 
+            })
+    }, []);
+    const displayGame = game || newGame;
     return (
         <div >
-            {game &&
-                <div key={game.id} className="GameInfo">
+            {displayGame &&
+                <div key={displayGame.id} className="GameInfo">
                      <div className='GameImgs'>
-                        <img className='GameTitleLogo' src={`/GameIcons/${game.name.replace(/:/g, '')}.png`} />
-                        <img className='BoxArt' src={`/BoxArt/${game.name.replace(/:/g, '')}.png`} />
+                        <img className='GameTitleLogo' src={newGame?.game_title_img ||`/GameIcons/${game?.name.replace(/:/g, '')}.png`} />
+                        <img className='BoxArt' src={ newGame?.box_img || `/BoxArt/${game?.name.replace(/:/g, '')}.png`} />
+                        {/* <img style={{width:'100px'}} src={ColorLink} alt="" /> */}
+                    </div>
+                    {<div className='CoolBar'>
 
+                    </div>}
+                    <div>
+                        
                     </div>
                     <div className='About'>
-                        <h2>{game.name}</h2>
-                        <p>Released date: {game.released_date}</p>
-                        <p>{game.description}</p>
-                        <p>Developer: {game.developer}</p>
-                        <p>Publisher: {game.publisher}</p>
+                        <h1>{displayGame.name}</h1>
+                        <p>Released date: {displayGame.released_date}</p>
+                        <p>{displayGame.description}</p>
+                        <p>Developer: {displayGame.developer}</p>
+                        <p>Publisher: {displayGame.publisher}</p>
                     </div>
                 </div>
 
