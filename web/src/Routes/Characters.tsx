@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-interface CharactersNames{
+import "../Styles/Characters.css"
+
+interface CharactersNames {
     name: string
 }
 
@@ -11,7 +13,7 @@ const Characters = () => {
         fetch(`https://zelda.fanapis.com/api/characters?limit=100`)
             .then((response) => response.json())
             .then((parsedResponse) => {
-                const characterNames = []; 
+                const characterNames = [];
 
                 for (let i = 0; i < parsedResponse.data.length; i++) {
                     console.log(parsedResponse.data[i].name);
@@ -19,25 +21,29 @@ const Characters = () => {
                 }
                 console.log(parsedResponse.data[0].name);
                 setCharacters(characterNames)
-                
+
             })
     }, []);
-  return (
-    <div>
-        <h1>Characters</h1>
-        <input type="text" />
+    return (
         <div>
-        {characters && characters.map((character) => (
-                    <div className="Characters">
+            <div className="">
+                <h1>Characters</h1>
+                <input type="text" />
+                <button>Pesquisar</button>
+            </div>
+
+            <div className="SeeCharacters">
+                {characters && characters.map((character) => (
+                    <div className="CharacterCard">
                         <h2>{character.name}</h2>
-                        <img style={{width:'150px'}} src="https://static.wikia.nocookie.net/zelda_gamepedia_en/images/4/4c/TotK_English_Logo.png" alt="" />
-                        <Link className="CharacterLink" to={`/characters/${character.name}`}>See Game</Link>
-                        
+
+                        <Link className="CharacterLink" to={`/characters/${character.name}`}>See Character</Link>
+
                     </div>
                 ))}
+            </div>
         </div>
-    </div>
-  )
+    )
 }
 
 export default Characters

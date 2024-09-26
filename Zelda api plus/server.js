@@ -1,15 +1,33 @@
+require('dotenv').config();
 const express = require('express');
+const mongoose = require('mongoose')
 const cors = require('cors');
 
 const app = express();
+
 app.use(cors());
 
-const port = process.env.PORT || 3000; // Use the port provided by the host or default to 3000
+const port = 3000; // Use the port provided by the host or default to 3000
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
+const dbUser = process.env.DB_USER
+const dbPassword = process.env.DB_PASS
 
-var Games = {
+mongoose.connect(
+  `mongodb+srv://${dbUser}:${dbPassword}@cluster0.4mdpo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+).then(()=>{
+  console.log('Conectou com o mongoDB lá');
+})
+
+app.post('/new/game', async(req,res) =>{
+  const {name,description,developer,publisher,released_date,game_title_img,id} = req.body
+
+  if(!name){
+    return res.status(422).json({msg:'O nome tá vazio'})
+  }
+})
+/* var Games = {
   "data": [{
         "name": "The Legend of Zelda: Tears of the Kingdom",
         "description": "The announcement of Tears of the Kingdom under the name Breath of the Wild 2 which Nintendo Called at the time The Sequel to Breath of the Wild was celebrated by fans across the world as Breath of the Wild was one of the most popular games on the Nintendo Switch and was known throughout the gaming community, especially after winning the Game of the Year award at the 2017 Japan Game Awards. Many fans speculated about whether Princess Zelda would be a playable character or if multiplayer would be added, but when asked, Aonuma declined to answer.",
@@ -44,7 +62,6 @@ var Games = {
   ]
 }
 
-// Define a route to handle incoming requests
 app.get('/games', (req, res) => {
   res.json(Games)
 });
@@ -57,4 +74,4 @@ app.get('/games/:id', (req, res) => {
   } else {
     res.json(item);
   }
-});
+}); */

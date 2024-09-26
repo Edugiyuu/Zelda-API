@@ -47,9 +47,7 @@ const Game = () => {
                         <img className='BoxArt' src={ newGame?.box_img || `/BoxArt/${game?.name.replace(/:/g, '')}.png`} />
                         {/* <img style={{width:'100px'}} src={ColorLink} alt="" /> */}
                     </div>
-                    {<div className='CoolBar'>
 
-                    </div>}
                     <div>
                         
                     </div>
