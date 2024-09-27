@@ -1,32 +1,35 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose')
-const cors = require('cors');
+import dotenv from 'dotenv';
+import express from "express";
+import mongoose from "mongoose";
 
+import routes from "./src/routes/routes.js"
+import cors from 'cors';
+
+dotenv.config();
 const app = express();
-
+app.use(routes)
+app.use(express.json())
 app.use(cors());
 
-const port = 3000; // Use the port provided by the host or default to 3000
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
-});
 const dbUser = process.env.DB_USER
 const dbPassword = process.env.DB_PASS
 
-mongoose.connect(
-  `mongodb+srv://${dbUser}:${dbPassword}@cluster0.4mdpo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
-).then(()=>{
+mongoose.connect(`mongodb+srv://${dbUser}:${dbPassword}@cluster0.4mdpo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
+.then(()=>{
   console.log('Conectou com o mongoDB lá');
+  app.listen(3000, () => {
+    console.log(`Server listening on port 3000!`);
+  });
 })
+.catch((err) => {
+  console.error('Erro ao conectar ao banco:', err);
+});
 
-app.post('/new/game', async(req,res) =>{
-  const {name,description,developer,publisher,released_date,game_title_img,id} = req.body
+app.get('/', (req, res) => {
+  res.json('opa')
+});
 
-  if(!name){
-    return res.status(422).json({msg:'O nome tá vazio'})
-  }
-})
+/*  */
 /* var Games = {
   "data": [{
         "name": "The Legend of Zelda: Tears of the Kingdom",
