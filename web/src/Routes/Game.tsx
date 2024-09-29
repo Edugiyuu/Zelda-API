@@ -29,7 +29,7 @@ const Game = () => {
             })
     }, []);
     useEffect(() => {
-        fetch(`http://localhost:3000/games/${params.game_id}`)
+        fetch(`http://localhost:3000/game/${params.game_id}`)
             .then((response) => response.json())
             .then((parsedResponse) => {
                 console.log(parsedResponse);

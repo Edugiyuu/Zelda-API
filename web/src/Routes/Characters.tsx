@@ -4,22 +4,23 @@ import "../Styles/Characters.css"
 
 interface CharactersNames {
     name: string
+    visuals:string
 }
 
 const Characters = () => {
     var [characters, setCharacters] = useState<CharactersNames[]>([])
 
     useEffect(() => {
-        fetch(`https://zelda.fanapis.com/api/characters?limit=100`)
+        fetch(`http://localhost:3000/characters`)
             .then((response) => response.json())
             .then((parsedResponse) => {
                 const characterNames = [];
 
-                for (let i = 0; i < parsedResponse.data.length; i++) {
-                    console.log(parsedResponse.data[i].name);
-                    characterNames.push(parsedResponse.data[i]);
+                for (let i = 0; i < parsedResponse.length; i++) {
+                    console.log(parsedResponse[i].name);
+                    characterNames.push(parsedResponse[i]);
                 }
-                console.log(parsedResponse.data[0].name);
+                
                 setCharacters(characterNames)
 
             })
@@ -34,9 +35,9 @@ const Characters = () => {
 
             <div className="SeeCharacters">
                 {characters && characters.map((character) => (
-                    <div className="CharacterCard">
+                    <div key={character.name} className="CharacterCard">
                         <h2>{character.name}</h2>
-
+                        <img src={character.visuals[0]} alt="" />
                         <Link className="CharacterLink" to={`/characters/${character.name}`}>See Character</Link>
 
                     </div>

@@ -6,7 +6,11 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon src/server.js",
+    "gameSeeds": "node src/seeds/gameSeeds.js",
+    "characterSeeds": "node src/seeds/characterSeeds.js",
+    "allSeeds": "node src/seeds/gameSeeds.js && node src/seeds/characterSeeds.js"
+    
   },
   "keywords": [],
   "author": "",

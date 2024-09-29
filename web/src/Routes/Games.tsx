@@ -33,8 +33,8 @@ const Games = () => {
         fetch(`http://localhost:3000/games`)
             .then((response) => response.json())
             .then((parsedResponse) => {
-                console.log(parsedResponse.data);
-                setNewGames(parsedResponse.data)
+                console.log(parsedResponse);
+                setNewGames(parsedResponse)
 
             })
     }, []);
