@@ -15,14 +15,15 @@ mongoose.connect(`mongodb+srv://${dbUser}:${dbPassword}@cluster0.4mdpo.mongodb.n
   console.error('Erro', err);
 });
 /* {
-  name: "",
-  description: "",
-  developer: "",
-  publisher: "",
-  released_date: "",
-  box_img: "",
-  game_title_img: "",
-  id: ""
+    name: "",
+    description: "",
+    Age: "",
+    gender: "",
+    race: "",
+    id: "",
+    visuals: [
+        '',
+    ]
 }, */
 const characters = [
     {
@@ -52,20 +53,7 @@ const characters = [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/f/f4/MM3D_Link_Model.png',
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/1/1e/ALBW_Link_Artwork.png',
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/4/47/TLoZ_Series_Link_Render.png',
-            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/0/05/MM3D_Link_Masks_Artwork.png',
-           
-            
-        ]
-    },
-    {
-        name: "Saria",
-        description: "Saria is Link's childhood friend from his earliest years in the Kokiri Forest. She is well-liked amongst other Kokiri, particularly by their boss, Mido, whose dislike of Link might be partially explained by the latter's close friendship with Saria. She often travels to the Sacred Forest Meadow to play her Ocarina.[6] She plays a song that inspires people to dance called Saria's Song. When Link becomes the Hero of Time, he rescues Saria from the Forest Temple and allows her to awaken as the Forest Sage.",
-        Age: "Unknown",
-        gender: "Female",
-        race: "Kokiri",
-        id: "0987ytrfdvgh2gs",
-        visuals: [
-            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/c/c3/OoT3D_Saria_Model.png',
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/0/05/MM3D_Link_Masks_Artwork.png',            
         ]
     },
     {
@@ -103,6 +91,100 @@ const characters = [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/5/50/MM_Happy_Mask_Salesman_Artwork.png'
         ]
     },
+    {
+        name: "Marin",
+        description: "Marin is a young woman who lives in Mabe Village with her father Tarin on Koholint Island. She saves Link when she discovers him on the Toronbo Shores after he was shipwrecked. Due to her resemblance to Princess Zelda,[7] Link confuses Marin with her when he wakes up at her house.After Link retrieves his Sword on the beach shore, Marin leaves her house and stands next to the Weathercock singing the Ballad of the Wind Fish,where she can be found for most of Link's quest.",
+        Age: "Unknown",
+        gender: "Female",
+        race: "Human",
+        id: "",
+        visuals: [
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/8/89/LADX_Marin_Artwork.png',
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/2/22/LA_Marin_Artwork.png',
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/f/f4/HWS_Marin_Artwork.png'
+        ]
+    },
+    {
+        name: "Cremia",
+        description: "Cremia is the look-alike older sister of Romani. She manages Romani Ranch in place of her deceased father. She is a close friend of the Stock Pot Inn keeper, Anju, and it is revealed by Romani that she has a crush on Kafei, Anju's fiancée.",
+        Age: "Unknown",
+        gender: "Female",
+        race: "Hylian",
+        id: "x5c6nhg3f290bmoaie",
+        visuals: [
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/3/3f/MM3D_Cremia_Model.png',
+        ]
+    },
+    {
+        name: "Kaifei",
+        description: "Kafei is the son of Mayor Dotour and Madame Aroma, and is engaged to Anju, the inn-keeper of the Stock Pot Inn. Although the two lovers made a promise to exchange their masks and get married on the day of the Carnival of Time, a sudden turn of events forces Kafei to run from Anju's side, leaving the inn-keeper without a reason for his immediate departure. Link, the Hero of Time, can meet Kafei by sneaking to the back of the Curiosity Shop while Kafei is getting the letter from Anju, during the Second Day. ",
+        Age: "",
+        gender: "Male",
+        race: "Hylian",
+        id: "45d678bgfdnbhjck",
+        visuals: [
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/e/e8/MM3D_Kafei_Model.png',
+        ]
+    },
+    {
+        name: "Rauru",
+        description: "After Link defeats Gohma in a failed attempt to save the Great Deku Tree, he leaves the Kokiri Forest and has his first encounter with Rauru, who awaits him in his owl form as Kaepora Gaebora at the edge of the woods. The owl gives him encouragement on the adventure the Great Deku Tree has tasked him with and advises him to visit Princess Zelda at Hyrule Castle before leaving with a promise that they will meet again.",
+        Age: "Unknown",
+        gender: "Male",
+        race: "Hylian",
+        id: "3erfgnko987trdfvbnk",
+        visuals: [
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/f/f9/OoT3D_Rauru_Model.png',
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/b/b5/OoT_Rauru.png',
+        ]
+    },
+    /* {
+        name: "Nabooru",
+        description: "Nabooru is a character in Ocarina of Time. She is the second-in-command of the Gerudo, with Ganondorf, the human form of Ganon, being her only superior. She has a second-in-command herself, who is the Gerudo who granted Link the permission to enter the Gerudo's Fortress freely. Nabooru is highly respected by the other Gerudo,who are unaware of her rebellion against Ganondorf. During the events of Ocarina of Time, she becomes the new Sage of Spirit and aids the Hero of Time in his battle against Ganon.",
+        Age: "Unknown",
+        gender: "Female",
+        race: "Gerudo",
+        id: "b2vuuncd1vcb18hb",
+        visuals: [
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/1/1e/OoT_Nabooru_Artwork.png',
+        ]
+    }, */
+    
+    {
+        name: "Navi",
+        description: "Navi is a recurring character in The Legend of Zelda series. She is a Fairy who serves as Link's companion in his quest to save Hyrule in Ocarina of Time.",
+        Age: "Unknown",
+        gender: "Female",
+        race: "Fairy",
+        id: "6e7gvwycqh8xujii1",
+        visuals: [
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/0/08/OoT3D_Navi_Artwork.png',
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/1/1e/OoT3D_Navi_Render.png'
+        ]
+    },
+    {
+        name: "Ghirahim",
+        description: "He is a figure of authority in the land below Skyloft, and he thinks quite highly of himself,[7][8] preferring to be called Lord Ghirahim.[9] His main objective is continuously hunting for Zelda, in order to use her spirit as a goddess for his plan to resurrect his master, Demise.[",
+        Age: "Unknown",
+        gender: "Male",
+        race: "Demonic",
+        id: "8l7kujtyhreww1wf",
+        visuals: [
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/f/fc/SS_Ghirahim_Artwork.png',
+        ]
+    },
+    {
+        name: "Saria",
+        description: "Saria is Link's childhood friend from his earliest years in the Kokiri Forest. She is well-liked amongst other Kokiri, particularly by their boss, Mido, whose dislike of Link might be partially explained by the latter's close friendship with Saria. She often travels to the Sacred Forest Meadow to play her Ocarina.[6] She plays a song that inspires people to dance called Saria's Song. When Link becomes the Hero of Time, he rescues Saria from the Forest Temple and allows her to awaken as the Forest Sage.",
+        Age: "Unknown",
+        gender: "Female",
+        race: "Kokiri",
+        id: "0987ytrfdvgh2gs",
+        visuals: [
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/c/c3/OoT3D_Saria_Model.png',
+        ]
+    },
+    
     
   
 ];

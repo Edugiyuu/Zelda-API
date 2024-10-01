@@ -4,7 +4,7 @@ import "../Styles/Characters.css"
 
 interface CharactersNames {
     name: string
-    visuals:string
+    visuals: string
 }
 
 const Characters = () => {
@@ -20,24 +20,29 @@ const Characters = () => {
                     console.log(parsedResponse[i].name);
                     characterNames.push(parsedResponse[i]);
                 }
-                
+
                 setCharacters(characterNames)
 
             })
     }, []);
     return (
         <div>
-            <div className="">
-                <h1>Characters</h1>
-                <input type="text" />
-                <button>Pesquisar</button>
+        <h1 style={{textAlign:'center'}}>Characters</h1>
+            <div className="Search">
+                <input type="text" placeholder="Search for a character" />
+                <button>Search</button>
             </div>
 
             <div className="SeeCharacters">
                 {characters && characters.map((character) => (
                     <div key={character.name} className="CharacterCard">
                         <h2>{character.name}</h2>
-                        <img src={character.visuals[0]} alt="" />
+                        {/* <img src={`/Characters/${character.name}.png` || character.visuals[0] } alt="" /> */}
+                        <img
+                            src={`/Characters/${character.name}.png`}
+                            alt={character.name}
+                            onError={(erro) => erro.currentTarget.src = character.visuals[0]}
+                        />
                         <Link className="CharacterLink" to={`/characters/${character.name}`}>See Character</Link>
 
                     </div>
