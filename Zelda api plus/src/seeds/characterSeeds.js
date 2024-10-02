@@ -92,16 +92,15 @@ const characters = [
         ]
     },
     {
-        name: "Marin",
-        description: "Marin is a young woman who lives in Mabe Village with her father Tarin on Koholint Island. She saves Link when she discovers him on the Toronbo Shores after he was shipwrecked. Due to her resemblance to Princess Zelda,[7] Link confuses Marin with her when he wakes up at her house.After Link retrieves his Sword on the beach shore, Marin leaves her house and stands next to the Weathercock singing the Ballad of the Wind Fish,where she can be found for most of Link's quest.",
+        name: "Navi",
+        description: "Navi is a recurring character in The Legend of Zelda series. She is a Fairy who serves as Link's companion in his quest to save Hyrule in Ocarina of Time.",
         Age: "Unknown",
         gender: "Female",
-        race: "Human",
-        id: "",
+        race: "Fairy",
+        id: "6e7gvwycqh8xujii1",
         visuals: [
-            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/8/89/LADX_Marin_Artwork.png',
-            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/2/22/LA_Marin_Artwork.png',
-            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/f/f4/HWS_Marin_Artwork.png'
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/0/08/OoT3D_Navi_Artwork.png',
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/1/1e/OoT3D_Navi_Render.png'
         ]
     },
     {
@@ -138,7 +137,7 @@ const characters = [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/b/b5/OoT_Rauru.png',
         ]
     },
-    /* {
+    {
         name: "Nabooru",
         description: "Nabooru is a character in Ocarina of Time. She is the second-in-command of the Gerudo, with Ganondorf, the human form of Ganon, being her only superior. She has a second-in-command herself, who is the Gerudo who granted Link the permission to enter the Gerudo's Fortress freely. Nabooru is highly respected by the other Gerudo,who are unaware of her rebellion against Ganondorf. During the events of Ocarina of Time, she becomes the new Sage of Spirit and aids the Hero of Time in his battle against Ganon.",
         Age: "Unknown",
@@ -147,19 +146,6 @@ const characters = [
         id: "b2vuuncd1vcb18hb",
         visuals: [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/1/1e/OoT_Nabooru_Artwork.png',
-        ]
-    }, */
-    
-    {
-        name: "Navi",
-        description: "Navi is a recurring character in The Legend of Zelda series. She is a Fairy who serves as Link's companion in his quest to save Hyrule in Ocarina of Time.",
-        Age: "Unknown",
-        gender: "Female",
-        race: "Fairy",
-        id: "6e7gvwycqh8xujii1",
-        visuals: [
-            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/0/08/OoT3D_Navi_Artwork.png',
-            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/1/1e/OoT3D_Navi_Render.png'
         ]
     },
     {
@@ -174,6 +160,17 @@ const characters = [
         ]
     },
     {
+        name: "Great Fairy",
+        description: "Great Fairies, also known as Guardian Spirits, are recurring characters in The Legend of Zelda series. They are large humanoid Fairies. Their main purpose is to heal Link whenever he is wounded and will also recover his Magic Power in games that incorporate a Magic Meter. In other titles, such as Ocarina of Time and The Wind Waker, they also bless Link with new items, powers, or upgrades of his existing equipment. The Great Fairies' appearance differ vastly between games, and most of them can be found living within a Great Fairy Fountain.",
+        Age: "Unknown",
+        gender: "Female",
+        race: "Fairy",
+        id: "7kj6h5g4rf0u8houin",
+        visuals: [
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/2/21/MM3D_Great_Fairy_Artwork.png',
+        ]
+    },
+    {
         name: "Saria",
         description: "Saria is Link's childhood friend from his earliest years in the Kokiri Forest. She is well-liked amongst other Kokiri, particularly by their boss, Mido, whose dislike of Link might be partially explained by the latter's close friendship with Saria. She often travels to the Sacred Forest Meadow to play her Ocarina.[6] She plays a song that inspires people to dance called Saria's Song. When Link becomes the Hero of Time, he rescues Saria from the Forest Temple and allows her to awaken as the Forest Sage.",
         Age: "Unknown",
@@ -184,7 +181,19 @@ const characters = [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/c/c3/OoT3D_Saria_Model.png',
         ]
     },
-    
+    {
+        name: "Marin",
+        description: "Marin is a young woman who lives in Mabe Village with her father Tarin on Koholint Island. She saves Link when she discovers him on the Toronbo Shores after he was shipwrecked. Due to her resemblance to Princess Zelda,[7] Link confuses Marin with her when he wakes up at her house.After Link retrieves his Sword on the beach shore, Marin leaves her house and stands next to the Weathercock singing the Ballad of the Wind Fish,where she can be found for most of Link's quest.",
+        Age: "Unknown",
+        gender: "Female",
+        race: "Human",
+        id: "",
+        visuals: [
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/8/89/LADX_Marin_Artwork.png',
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/2/22/LA_Marin_Artwork.png',
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/f/f4/HWS_Marin_Artwork.png'
+        ]
+    },
     
   
 ];
