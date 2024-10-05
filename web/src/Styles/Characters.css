@@ -4,39 +4,50 @@
     flex-wrap: wrap;
     justify-content: center;
     
-    gap: 20px;
+    gap: 30px;
 }
 
-.CharacterCard{
+.CharacterTitle {
+    
+    font-family: 'HyliaSerif', sans-serif;
+    color: #b1a751;
+    letter-spacing: 3px;
+    font-weight: normal;
+    font-size: 70px;
+
+  }
+  .CharacterCard {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
-    padding-bottom: 30px;
-    padding-top: 30px;
+    
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
     width: 230px;
-    height: 300px;
-    background-color: rgb(240, 240, 240);
+    height: 350px;
+    background-color: #f5f5f5;
     border-radius: 20px;
     color: #515555;
-    border: 1px solid #515555;
+    border: 1px solid #b1a751;
+    justify-content: space-between;
 }
-.CharacterLink{
-    display: flex;
-    text-align:end;
-    background-color: rgb(44, 171, 180);
+.CharacterLink {
+    background-color: #b1a751;
     color: white;
     padding-left: 40px;
     padding-right: 40px;
     padding-top: 15px;
     padding-bottom: 15px;
-    border-radius: 40px;
-    
-    
+    border-bottom-right-radius: 17px;
+    border-bottom-left-radius: 17px;
+    max-width:190px;
+    width: 250px;
+    text-align: center;
 }
 .CharacterCard img{
     max-height: 200px;
-    max-width: 200px;
+
 }
 .Search{
     display: flex;
@@ -47,12 +58,12 @@
 }
 .Search input{
     border-radius: 10px;
-    border: 1px solid rgb(253, 253, 191);
+    border: 1px solid #b1a751;
     width: 250px;
     padding: 10px;
 }
 .Search input{
     border-radius: 20px;
-    border: 1px solid rgb(253, 253, 191);
+    border: 1px solid #b1a751;
     
 }

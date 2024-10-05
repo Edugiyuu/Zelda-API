@@ -144,3 +144,8 @@
     display: none;
   }
 }
+@font-face {
+  font-family: 'HyliaSerif'; 
+  src: url('../fonts/HyliaSerifBeta-Regular.otf'); 
+
+}

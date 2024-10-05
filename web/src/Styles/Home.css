@@ -40,7 +40,9 @@ html, body {
     border-radius: 40px;
     font-size: 18px;
 }
+
 .Home h1{
+   
     background-image: url('../Imgs/Bg/ZeldaHome2.png');
     background-size: cover; 
     background-clip: text;
@@ -48,6 +50,7 @@ html, body {
     background-position:bottom; 
     text-shadow:none;
     text-align: center;
+ 
 }
 
 @media (max-width: 768px) {

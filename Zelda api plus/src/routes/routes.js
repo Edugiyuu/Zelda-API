@@ -4,6 +4,7 @@ import { getGames } from '../controller/getGames.js';
 import cors from 'cors';
 import { getGame } from '../controller/getGame.js';
 import { getCharacters } from '../controller/getCharacters.js';
+import { getCharacter } from '../controller/getCharacter.js';
 
 const router = express.Router();
 router.use(express.json());
@@ -18,6 +19,7 @@ router.get("/game/:id",getGame);
 
 //----------------Characters-----------------
 router.get("/characters",getCharacters);
+router.get("/character/:id",getCharacter);
 //-------------------------------------------
 
 export default router;

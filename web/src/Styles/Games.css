@@ -2,7 +2,15 @@
     text-align: center;
     margin: 60px;
 }
+.GameTitle {
+    
+    font-family: 'HyliaSerif', sans-serif;
+    color: #b1a751;
+    letter-spacing: 3px;
+    font-weight: normal;
+    font-size: 70px;
 
+  }
 .AllGames {
     display: flex;
     flex-wrap: wrap;

@@ -50,9 +50,9 @@ const Games = () => {
     }, []); */
 
     return (
-        <div>
+        <div >
 
-            <h1 className="GameTitle">Games about ZELDA</h1>
+            <h1 className="GameTitle">A Universe of Zelda Games</h1>
 
             <div className="AllGames">
                 {games && games.map((game) => (

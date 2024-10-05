@@ -5,6 +5,7 @@ import "../Styles/Characters.css"
 interface CharactersNames {
     name: string
     visuals: string
+    id: string
 }
 
 const Characters = () => {
@@ -27,7 +28,7 @@ const Characters = () => {
     }, []);
     return (
         <div>
-        <h1 style={{textAlign:'center'}}>Characters</h1>
+        <h1 className='CharacterTitle'style={{textAlign:'center'}}>Characters</h1>
             <div className="Search">
                 <input type="text" placeholder="Search for a character" />
                 <button>Search</button>
@@ -43,7 +44,7 @@ const Characters = () => {
                             alt={character.name}
                             onError={(erro) => erro.currentTarget.src = character.visuals[0]}
                         />
-                        <Link className="CharacterLink" to={`/characters/${character.name}`}>See Character</Link>
+                        <Link className="CharacterLink" to={`/characters/${character.id}`}>See Character</Link>
 
                     </div>
                 ))}
