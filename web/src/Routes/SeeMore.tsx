@@ -29,8 +29,8 @@ const SeeMore = () => {
           <div className='BoxDungeons'>
             <Link className='Dungeons' to={'/dungeons'}>Dungeons</Link>
           </div>
-          <div className='BoxMonsters'>
-            <Link className='Monsters' to={'/monsters'}>Monsters</Link>
+          <div className='BoxRaces'>
+            <Link className='Races' to={'/races'}>Races</Link>
           </div>
 
 

@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import '../Styles/Character.css'
-import ColorLink from '../Imgs/Characters/ColorLink.png'
+import AliceCarousel from 'react-alice-carousel';
+import "react-alice-carousel/lib/alice-carousel.css";
 
 interface Character {
     name: string,
@@ -9,8 +10,8 @@ interface Character {
     description: string,
     gender: string,
     id: string,
-    race:string,
-    visuals:[string]
+    race: string,
+    visuals: [string]
 }
 
 const Character = () => {
@@ -26,33 +27,25 @@ const Character = () => {
 
             })
     }, []);
-    
     return (
         <div >
             {character &&
-                <div key={character.id} className="GameInfo">
-                     <div className='CharacterImgs'>
-                     <img
-                            src={`/Characters/${character.name}.png`}
-                            alt={character.name}
-                            onError={(erro) => {
-                                if (character && character.visuals && character.visuals.length > 0) {
-                                  erro.currentTarget.src = character.visuals[0];
-                                } else {
-                                  erro.currentTarget.src = '/Characters/camera.png';
-                                }
-                              }}
-                              
-                        />
-                      
+                <div key={character.id} className="CharacterInfo">
+                    <div className='CharacterImgs'>
+
+                        <AliceCarousel autoPlay autoPlayInterval={6000}>
+                            <img src={`/Characters/${character.name}.png`} className="sliderimg" alt="" />
+                            <img src={character.visuals[0]} className="sliderimg" alt="" />
+                            <img src={character?.visuals[1]} className="sliderimg" alt="" />
+                        </AliceCarousel>
                     </div>
 
                     <div>
-                        
+
                     </div>
                     <div className='About'>
                         <h1>{character.name}</h1>
-                        <p>Age: {character.age}</p>
+                        <p>Age: <Link className='' to='character.age'>{character.age}</Link></p>
                         <p>Race: {character.race}</p>
                         <p>Gender: {character.gender}</p>
                         <p>{character.description}</p>

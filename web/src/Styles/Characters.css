@@ -10,7 +10,7 @@
 .CharacterTitle {
     
     font-family: 'HyliaSerif', sans-serif;
-    color: #b1a751;
+    color: #c0b763;
     letter-spacing: 3px;
     font-weight: normal;
     font-size: 70px;
@@ -29,11 +29,17 @@
     background-color: #f5f5f5;
     border-radius: 20px;
     color: #515555;
-    border: 1px solid #b1a751;
+    border: 1px solid #c0b763;
     justify-content: space-between;
+  /*   background-image: url('../Imgs/Bg/BookIcon.png');
+    background-size: 180px;
+    background-repeat: no-repeat;
+    background-position: center; */
+   
+    
 }
 .CharacterLink {
-    background-color: #b1a751;
+    background-color: #c0b763;
     color: white;
     padding-left: 40px;
     padding-right: 40px;

@@ -93,6 +93,7 @@
 .Characters,
 .Games,
 .Monsters,
+.Races,
 .Dungeons {
   background: rgba(0, 0, 0, 0.658);
   border: none;
@@ -103,6 +104,7 @@
 .BoxBosses,
 .BoxCharacters,
 .BoxMonsters,
+.BoxRaces,
 .BoxDungeons{
   background-size: cover;
   background-position: center;
@@ -125,7 +127,7 @@
   background-image: url('../Imgs/Bg/Characters.png');
 }
 
-.BoxMonsters {
+.BoxMonsters,.BoxRaces {
   background-image: url('../Imgs/Bg/Monster.png');
 }
 .BoxDungeons{
