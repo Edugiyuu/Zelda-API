@@ -4,7 +4,6 @@
     align-items: center;
 }
 
-
 .GameImgs {
 
     display: flex;
@@ -18,8 +17,9 @@
     border-radius: 20px;
     
 }
-.GameTitleLogo img{
-    width: 200px;
+
+.GameTitleLogo {
+    max-width: 200px;
 }
 
 .BoxArt {
@@ -63,7 +63,7 @@
         align-items: center;
         flex-direction: column;
     }
-    .CharacterImgs {
+    .GameImgs {
         margin-bottom: 90px;
     }
     .About {

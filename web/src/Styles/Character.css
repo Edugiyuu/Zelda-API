@@ -55,6 +55,23 @@
 .CharacterImgs img{
     width: 200px;
 }
+.CharacterRace{
+   /*  display: flex;
+   flex-direction: row;
+   justify-content: start;
+   align-items: center; */
+    background-color: #ccc26b;
+    color: white;
+    border-radius: 50px;
+    max-width: 250px;
+    padding: 15px;
+   
+}
+.CharacterRace img{
+    width: 30px;
+
+    
+}
 
 .BoxArt {
     width: 255px;
@@ -97,9 +114,7 @@
         align-items: center;
         flex-direction: column;
     }
-    .GameImgs {
-        margin-bottom: 90px;
-    }
+    
     .About {
         display: flex;
         margin: 20px;

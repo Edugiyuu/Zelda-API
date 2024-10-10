@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import '../Styles/Character.css'
 import AliceCarousel from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css";
+import elf from '../Imgs/Races/elf.png'
 
 interface Character {
     name: string,
@@ -36,7 +37,7 @@ const Character = () => {
                         <AliceCarousel autoPlay autoPlayInterval={6000}>
                             <img src={`/Characters/${character.name}.png`} className="sliderimg" alt="" />
                             <img src={character.visuals[0]} className="sliderimg" alt="" />
-                            <img src={character?.visuals[1]} className="sliderimg" alt="" />
+                            <img src={character.visuals[1]} className="sliderimg" alt="" />
                         </AliceCarousel>
                     </div>
 
@@ -45,8 +46,8 @@ const Character = () => {
                     </div>
                     <div className='About'>
                         <h1>{character.name}</h1>
-                        <p>Age: <Link className='' to='character.age'>{character.age}</Link></p>
-                        <p>Race: {character.race}</p>
+                        <p>Age: {character.age}</p>
+                        <p>Race: <Link className='CharacterRace' to="/races">{character.race} <img src={elf} alt="" /></Link></p>
                         <p>Gender: {character.gender}</p>
                         <p>{character.description}</p>
                     </div>
