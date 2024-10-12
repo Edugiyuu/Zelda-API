@@ -34,7 +34,7 @@ const Character = () => {
                 <div key={character.id} className="CharacterInfo">
                     <div className='CharacterImgs'>
 
-                        <AliceCarousel autoPlay autoPlayInterval={6000}>
+                        <AliceCarousel infinite disableButtonsControls disableDotsControls autoPlay autoPlayInterval={2000}>
                             <img src={`/Characters/${character.name}.png`} className="sliderimg" alt="" />
                             <img src={character.visuals[0]} className="sliderimg" alt="" />
                             <img src={character.visuals[1]} className="sliderimg" alt="" />
@@ -44,7 +44,7 @@ const Character = () => {
                     <div>
 
                     </div>
-                    <div className='About'>
+                    <div className='AboutCharacter'>
                         <h1>{character.name}</h1>
                         <p>Age: {character.age}</p>
                         <p>Race: <Link className='CharacterRace' to="/races">{character.race} <img src={elf} alt="" /></Link></p>

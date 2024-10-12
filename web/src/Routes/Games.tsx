@@ -70,10 +70,9 @@ const Games = () => {
                 ))}
                 {newGames && newGames.map((game) => (
                     <div key={game.id} className="GameCard">
-                        <h2>{game.name}</h2>
+                        <h3>{game.name}</h3>
                         <p>{game.released_date}</p>
                         <img
-                            style={{ width: '150px' }}
                             src={game.game_title_img}
 
                         />

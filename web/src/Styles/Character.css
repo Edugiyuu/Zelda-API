@@ -21,17 +21,21 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center; */
-    background-color: #f5f5f5;
-    border: 3px solid #ccc26b;
+    background-color: #131313a2;
+    border: 2px solid #ccc26b;
 }
-
+.CharacterImgs .alice-carousel {
+    width: 100%; 
+    margin: 0 0; 
+    padding: 0px 0;
+    display: block;
+  }
 .sliderimg {
     display: block;
-    margin: 0 auto;
-    padding-top: 20px;
+    margin: 10px auto;
    
-    width: 300px;
-    height: 400px;
+   
+    height: 350px;
     object-fit: contain;
 
  }
@@ -69,19 +73,9 @@
 }
 .CharacterRace img{
     width: 30px;
-
-    
 }
 
-.BoxArt {
-    width: 255px;
-    transform-style: preserve-3d;
-    animation: rotate3D 4s infinite linear;
-    border-radius: 5px;
-    box-shadow: 0 0 30px 0px rgba(0, 0, 0, 0.363); /* Brilho suave inicial */
-    transition: box-shadow 0.3s ease-in-out; /* Transição suave ao hover */
-   
-}
+
 
 @keyframes rotate3D {
     0% {
@@ -93,7 +87,7 @@
     }
 }
 
-.About {
+.AboutCharacter {
     display: flex;
     margin: 20px;
     flex-direction: column;
@@ -114,19 +108,44 @@
         align-items: center;
         flex-direction: column;
     }
-    
-    .About {
+    .CharacterImgs img{
+        width: 200px;
+    }
+    .AboutCharacter {
         display: flex;
-        margin: 20px;
         flex-direction: column;
-        margin-left: 20px;
         justify-items: center;
-        padding: 20px;
+        align-items: center;
+        margin: 0px;
+        
+        margin-left: 0px;
+        
+        padding: 10px;
         background-color: rgb(252, 252, 252);
         color: rgb(0, 0, 0);
-        border-radius: 20px;
-        box-shadow: 0px 1px 2px 0px #7f8c8d;
+        border-radius: 15px;
+        box-shadow: 0px 3px 20px 5px #9b9b9b;
         color: #515555;
-    
+    }
+    .CharacterImgs {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        max-width: 900px;
+        width: 100%;
+        margin-left: 0px;
+        margin-top: 0px;
+        border-radius: 0px;
+        /* background-image: url('../Imgs/Bg/BookIcon.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center; */
+        background-color: #13131300;
+        border: 0px solid #ccc26b;
+    }
+    .CharacterInfo{
+        background-color: #131313a8;
     }
   }

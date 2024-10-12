@@ -10,8 +10,8 @@
 
 .SeeMore h1 {
   font-size: 2.5rem;
-  margin: 50px;
-  margin-bottom: 80px;
+  margin: 30px;
+  margin-bottom: 50px;
   background-image: url('../Imgs/Bg/Florest.jpg');
   background-size: cover;
   background-clip: text;
@@ -139,13 +139,164 @@
   transform: scale(1.05);
   box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.15);
 }
+/*  */
+/* .SeeMoreSlides{
+  width: 70%;
+} */
+.alice-carousel {
+  width: 100%; 
+  margin: 0 auto; 
+  padding: 20px 0;
+  display: none;
+}
 
 
-@media (max-width: 768px) {
+.SlideGames,
+.SlideBosses,
+.SlideCharacters,
+.SlideMonsters,
+.SlideRaces,
+.SlideDungeons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size:200px;
+  background-position: center;
+  border-radius: 15px;
+  width: 300px;
+  height: 120px;
+  background-repeat: no-repeat;
+  background-color: rgb(255, 255, 255);
+  transition: transform 0.3s ease;
+  margin-bottom: 70px;
+  margin-left: 15%;
+}
+.SlideGames a,
+.SlideBosses a,
+.SlideCharacters a,
+.SlideMonsters a,
+.SlideRaces a,
+.SlideDungeons a{
+  text-align: center;
+  border-radius: 15px;
+  color: rgb(255, 255, 255);
+  width: 350px;
+  height: 120px;
+  background-color: rgba(0, 0, 0, 0.651);
+}
+
+.SlideGames {
+  background-image: url('../Imgs/Bg/ZeldaLogo.png');
+}
+
+.SlideBosses {
+  background-image: url('../Imgs/Bg/Boss.png');
+}
+
+.SlideCharacters {
+  background-image: url('../Imgs/Bg/Characters.png');
+}
+
+.SlideMonsters {
+  background-image: url('../Imgs/Bg/Monster.png');
+}
+
+.SlideRaces {
+  background-image: url('../Imgs/Races/elf3.png');
+}
+
+.SlideDungeons {
+  background-image: url('../Imgs/Bg/Link2.png');
+}
+
+.SlideGames:hover,
+.SlideBosses:hover,
+.SlideCharacters:hover,
+.SlideMonsters:hover,
+.SlideRaces:hover,
+.SlideDungeons:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+
+@media (max-width: 868px) {
   .SideBox {
     display: none;
   }
+  .alice-carousel {
+
+    margin: 0 auto;
+    padding: 0;
+    display: block;
+  }
+
 }
+@media (max-width: 568px) {
+  .alice-carousel {
+
+    margin: 0 auto;
+    padding: 0;
+
+  }
+  
+ 
+  .SlideGames a,
+.SlideBosses a,
+.SlideCharacters a,
+.SlideMonsters a,
+.SlideRaces a,
+.SlideDungeons a{
+  display: flex;
+  align-items: end;
+  padding: 10px;
+  text-align: center;
+  border-radius: 15px;
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 20px;
+  background-color:rgba(0, 0, 0, 0.808);
+}
+
+.SlideGames,
+.SlideBosses,
+.SlideCharacters,
+.SlideMonsters,
+.SlideRaces,
+.SlideDungeons {
+
+  height: 300px;
+  width: 90%;
+
+  margin-left: 5%;
+}
+/*  */
+.Links a {
+  align-items: center;
+  justify-content: start;
+  width: 300px;
+  
+  height: 100px;
+
+}
+.BoxGames,
+.BoxBosses,
+.BoxCharacters,
+.BoxMonsters,
+.BoxRaces,
+.BoxDungeons{
+  
+  background-position:right;
+
+  background-size: 200px;
+  background-repeat: no-repeat;
+  background-color: rgb(255, 255, 255);
+}
+
+}
+
 @font-face {
   font-family: 'HyliaSerif'; 
   src: url('../fonts/HyliaSerifBeta-Regular.otf'); 
