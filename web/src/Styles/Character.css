@@ -2,34 +2,36 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 .CharacterImgs {
 
     display: flex;
-    max-width: 400px;
-    width: 10000px;
-    perspective: 600px;
+    max-width: 450px;
+    width: 100%;
+  
+
     flex-direction: column;
     align-items: center;
     justify-content: center;
   
-    margin-left: 20px;
-    margin-top: 20px;
     border-radius: 20px;
     /* background-image: url('../Imgs/Bg/BookIcon.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center; */
-    background-color: #131313a2;
-    border: 2px solid #ccc26b;
+   
+   
 }
 .CharacterImgs .alice-carousel {
     width: 100%; 
     margin: 0 0; 
     padding: 0px 0;
+    
     display: block;
   }
+ 
 .sliderimg {
     display: block;
     margin: 10px auto;
@@ -39,22 +41,6 @@
     object-fit: contain;
 
  }
- 
-.alice-carousel__prev-btn-item,.alice-carousel__next-btn-item{
-    border: none;
-    color: #000;
-   
-    font-size: 24px;
-    width: auto;
-    height: auto;
-    padding: 10px; 
-}
-:hover 
-.alice-carousel__prev-btn-item,.alice-carousel__next-btn-item{
- 
-    color: #000; 
-
-}
 
 .CharacterImgs img{
     width: 200px;
@@ -89,17 +75,19 @@
 
 .AboutCharacter {
     display: flex;
-    margin: 20px;
     flex-direction: column;
-    margin-left: 60px;
     justify-items: center;
+
     padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     background-color: rgb(252, 252, 252);
     color: rgb(0, 0, 0);
-    border-radius: 20px;
-    box-shadow: 0px 1px 2px 0px #7f8c8d;
+    border-radius: 25px;
+    /* border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+    box-shadow: 0px 1px 2px 0px #7f8c8d; */
     color: #515555;
-
 }
 @media (max-width: 768px) {
     .CharacterInfo {

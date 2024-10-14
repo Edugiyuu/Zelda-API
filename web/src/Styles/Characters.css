@@ -3,15 +3,14 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    
     gap: 40px;
 }
 
 .CharacterTitle {
     
     font-family: 'HyliaSerif', sans-serif;
-    color: #c0b763;
     letter-spacing: 3px;
+    color: #b5a54d;   
     font-weight: normal;
     font-size: 70px;
 
@@ -26,15 +25,15 @@
     padding-top: 20px;
     width: 240px;
     height: 420px;
-    background-color: #f5f5f5;
+    background-color: #1d1b1b;
     border-radius: 20px;
-    color: #515555;
-    border: 1px solid #c0b763;
+    color: #f7f7f7;
+    box-shadow: 0px 0px 3px 0px#515555;
     justify-content: space-between;
-  /*   background-image: url('../Imgs/Bg/BookIcon.png');
-    background-size: 180px;
+    background-image: url('../Imgs/Bg/BookIcon.png');
+    background-size: 190px;
     background-repeat: no-repeat;
-    background-position: center; */
+    background-position: center;
 }
 
 .CharacterCard div{
@@ -45,7 +44,7 @@
    
 }
 .CharacterLink {
-    background-color: #c0b763;
+    background-color: #b5a54d ;
     color: white;
     padding-left: 40px;
     padding-right: 40px;
@@ -67,8 +66,8 @@
     background-color: #c0b763d0;
     border-radius: 30px;
     padding: 10px;
-    width: 150px;
-    gap: 10px;
+    width: 120px;
+    gap: 5px;
     color: white;
 }
 .CharactersRaces img{
@@ -82,13 +81,21 @@
   
 }
 .Search input{
-    border-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
     border: 1px solid #b1a751;
-    width: 250px;
-    padding: 10px;
+    border-right: none;
+    width: 40%;
+    padding: 20px;
+    margin-bottom: 20px;
 }
-.Search input{
-    border-radius: 20px;
+.Search button{
+    padding: 20px;
     border: 1px solid #b1a751;
-    
+   /*  border-left: none; */
+    color: #515555;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: white;
+    margin-bottom: 20px;
 }

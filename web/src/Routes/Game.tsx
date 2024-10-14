@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import '../Styles/Game.css'
+import '../Styles/mobile/Game.css'
 import ColorLink from '../Imgs/Characters/ColorLink.png'
 
 interface Game {
@@ -39,7 +40,7 @@ const Game = () => {
     }, []);
     const displayGame = game || newGame;
     return (
-        <div >
+        <div className='GameAbout' >
             {displayGame &&
                 <div key={displayGame.id} className="GameInfo">
                      <div className='GameImgs'>

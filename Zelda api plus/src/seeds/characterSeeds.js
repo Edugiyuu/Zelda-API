@@ -36,7 +36,6 @@ const characters = [
         visuals: [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/1/1d/SS_Zelda_Artwork.png' ,
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/a/af/OoS_Zelda_Artwork.png' ,
-            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/c/c9/TotK_Princess_Zelda_Artwork.png' ,
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/d/dc/Link_To_The_Past_Remake_-_Princess_Zelda.png' ,
         ]
     },
@@ -53,7 +52,8 @@ const characters = [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/f/f4/MM3D_Link_Model.png',
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/1/1e/ALBW_Link_Artwork.png',
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/4/47/TLoZ_Series_Link_Render.png',
-            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/0/05/MM3D_Link_Masks_Artwork.png',            
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/0/05/MM3D_Link_Masks_Artwork.png',
+            'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/0/0a/LANS_Link_Render.png'            
         ]
     },
     {

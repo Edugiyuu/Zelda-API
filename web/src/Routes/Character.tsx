@@ -34,11 +34,12 @@ const Character = () => {
                 <div key={character.id} className="CharacterInfo">
                     <div className='CharacterImgs'>
 
-                        <AliceCarousel infinite disableButtonsControls disableDotsControls autoPlay autoPlayInterval={2000}>
-                            <img src={`/Characters/${character.name}.png`} className="sliderimg" alt="" />
-                            <img src={character.visuals[0]} className="sliderimg" alt="" />
-                            <img src={character.visuals[1]} className="sliderimg" alt="" />
+                        <AliceCarousel infinite disableButtonsControls autoPlayStrategy='none' autoPlay autoPlayInterval={2500}>
+                            {character.visuals.map((visual) => (
+                                <img src={visual} className="sliderimg" />
+                            ))}
                         </AliceCarousel>
+
                     </div>
 
                     <div>
