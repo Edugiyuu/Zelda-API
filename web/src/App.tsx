@@ -7,6 +7,7 @@ import Games from "./Routes/Games";
 import Characters from "./Routes/Characters";
 import Character from "./Routes/Character";
 import Game from "./Routes/Game";
+import Bosses from "./Routes/Bosses";
 
 
 function App() {
@@ -23,14 +24,16 @@ function App() {
 
         <Route path="/" element={<Home />} />
         <Route path="/more" element={<SeeMore />} />
+
         <Route path="/games" element={<Games />} />
-        
         <Route path="/games/:game_id" element={<Game/>}/>
 
         <Route path="/characters" element={<Characters />} />
         <Route path="/characters/:character_id" element={<Character/>}/>
-      
 
+        <Route path="/bosses" element={<Bosses />} />
+        {/* <Route path="/bosses/:bosse_id" element={<Character/>}/> */}
+      
       </Routes>
 
     </BrowserRouter>

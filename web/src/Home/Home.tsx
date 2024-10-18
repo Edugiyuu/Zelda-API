@@ -13,6 +13,8 @@ const Home = () => {
                 <h1>The Legend of Zelda API</h1>
                 <p>bla bla bla bla bla bla bla bla bla</p>
                 <Link to={'/more'}>See more</Link>
+                <img src="https://media.tenor.com/LjpodfXOBj4AAAAi/8bit-link.gif" ></img>
+                
             </div>
         
         </div>

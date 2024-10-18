@@ -7,7 +7,6 @@ const NavBar = () => {
     <nav className='NavBar'>
       <img src={MiniLink} width={"30px"} alt="" />
       <Link to={`/`}>Home</Link>
-
     </nav>
   );
 }
