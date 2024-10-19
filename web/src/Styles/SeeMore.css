@@ -12,11 +12,11 @@
   font-size: 2.5rem;
   margin: 30px;
   margin-bottom: 50px;
-  background-image: url('../Imgs/Bg/Florest.jpg');
+  background-image: url('../Imgs/Bg/ZeldaHome2.png');
   background-size: cover;
   background-clip: text;
   color: transparent;
-  background-position: center;
+  background-position: bottom;
 
 }
 
@@ -33,7 +33,7 @@
   width: 600px;
   height: 400px;
   box-shadow: 1px 1px 6px;
-  background-color: rgb(209, 244, 247);
+  background-color: rgb(216, 239, 241);
   margin-left: 20px;
   border-radius: 20px;
 }

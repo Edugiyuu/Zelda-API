@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-/* import '../Styles/Bosses.css' */
+import '../Styles/Bosses.css'
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -19,40 +19,46 @@ const Bosses = () => {
         fetch(`https://zelda.fanapis.com/api/bosses?limit=100`)
             .then((response) => response.json())
             .then((parsedResponse) => {
-                console.log(parsedResponse.data);
-                setGames(parsedResponse.data)
-
-            })
+                const NomesExcluidos = ["Agitha", "Glutko","Princess Zelda", "Mazura","Big Liar"];
+                const filteredBosses = parsedResponse.data.filter((boss: { name: string; }) => {
+                   //mostra só os nomes e
+                    return !NomesExcluidos.includes(boss.name);
+                });
+                console.log(filteredBosses);
+                setGames(filteredBosses);
+            });
     }, []);
+    
+    
 
     return (
         <div >
 
-            <h1 className="GameTitle">A Universe of Zelda Bosses</h1>
+            <h1 className="BossTitle">Fearsome Enemies of Hyrule.</h1>
 
-            <div className="AllGames">
+            <div className="AllBosses">
                 {games && games.map((game) => (
-                    <div key={game.id} className="GameCard">
+                    <div key={game.id} className="BossCard">
                         <h2>{game.name}</h2>
                         <p>{game.released_date}</p>
                         <img
                             style={{ width: '150px' }}
-                            src={`/GameIcons/${game.name.replace(/:/g, '')}.png`}
+                            src={`/Bosses/${game.name.replace(/:/g, '')}.png`}
 
                         />
-                        <Link className="GameCardLink" to={`/games/${game.id}`}>See Game</Link>
+                        <Link className="BossCardLink" to={`/games/${game.id}`}>See Game</Link>
 
                     </div>
                 ))}
                 {newGames && newGames.map((game) => (
-                    <div key={game.id} className="GameCard">
+                    <div key={game.id} className="BossCard">
                         <h3>{game.name}</h3>
                         <p>{game.released_date}</p>
                         <img
                             src={game.game_title_img}
 
                         />
-                        <Link className="GameCardLink" to={`/games/${game.id}`}>See Game</Link>
+                        <Link className="BossCardLink" to={`/games/${game.id}`}>See Game</Link>
 
                     </div>
                 ))}
