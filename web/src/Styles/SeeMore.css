@@ -5,18 +5,18 @@
   justify-content: center;
   text-align: center;
   justify-content: center;
-
+  background-image: url('./Imgs/Bg/NavBar1.png');
 }
 
 .SeeMore h1 {
   font-size: 2.5rem;
   margin: 30px;
-  margin-bottom: 50px;
-  background-image: url('../Imgs/Bg/ZeldaHome2.png');
+  margin-bottom: 60px;
+  background-image: url('../Imgs/Bg/Florest.jpg');
   background-size: cover;
   background-clip: text;
   color: transparent;
-  background-position: bottom;
+  background-position: center;
 
 }
 
@@ -127,8 +127,11 @@
   background-image: url('../Imgs/Bg/Characters.png');
 }
 
-.BoxMonsters,.BoxRaces {
+.BoxMonsters{
   background-image: url('../Imgs/Bg/Monster.png');
+}
+.BoxRaces {
+  background-image: url('../Imgs/Bg/Races.png');
 }
 .BoxDungeons{
   background-image: url('../Imgs/Bg/Link2.png');

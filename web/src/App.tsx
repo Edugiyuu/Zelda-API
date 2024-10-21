@@ -8,6 +8,7 @@ import Characters from "./Routes/Characters";
 import Character from "./Routes/Character";
 import Game from "./Routes/Game";
 import Bosses from "./Routes/Bosses";
+import Races from "./Routes/Races";
 
 
 function App() {
@@ -33,6 +34,8 @@ function App() {
 
         <Route path="/bosses" element={<Bosses />} />
         {/* <Route path="/bosses/:bosse_id" element={<Character/>}/> */}
+
+        <Route path="/races" element={<Races />} />
       
       </Routes>
 

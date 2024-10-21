@@ -9,7 +9,8 @@
     "start": "nodemon src/server.js",
     "gameSeeds": "node src/seeds/gameSeeds.js",
     "characterSeeds": "node src/seeds/characterSeeds.js",
-    "allSeeds": "node src/seeds/gameSeeds.js && node src/seeds/characterSeeds.js"
+    "raceSeeds": "node src/seeds/raceSeeds.js",
+    "allSeeds": "node src/seeds/gameSeeds.js && node src/seeds/raceSeeds.js"
     
   },
   "keywords": [],

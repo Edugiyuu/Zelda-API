@@ -3,26 +3,25 @@
     display: inline-block;
     padding: 10px 30px;
     background-color: #0e0e0e;
-    
     color: white;
     text-align: center;
     font-size: 20px;
-    
- 
+    margin: 10px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-
-.borderButton:hover {
-   
+.buttonText:hover {
+    background-color: #292929; /* Muda a cor de fundo ao passar o mouse */
 }
 
 .decoration {
     position: absolute;
-    width: 40px;
-    
+    width: 35px;
+    transition: transform 0.3s ease; /* Animação suave na transformação */
 }
 
+/* Posições iniciais das decorações */
 .decoration.top1 {
     top: -10px; 
     left: -10px;
@@ -43,5 +42,21 @@
 .decoration.bottom2 {
     bottom: -10px; 
     left: -10px;
-   
+}
+
+/* Efeito de hover nas imagens de decoração */
+.buttonText:hover .decoration.top1 {
+    transform: translate(-10px, -10px); /* Move a decoração superior esquerda */
+}
+
+.buttonText:hover .decoration.bottom1 {
+    transform: translate(10px, 10px) scaleX(-1); /* Move a decoração inferior direita */
+}
+
+.buttonText:hover .decoration.top2 {
+    transform: translate(10px, -10px) scaleX(-1); /* Move a decoração superior direita */
+}
+
+.buttonText:hover .decoration.bottom2 {
+    transform: translate(-10px, 10px); /* Move a decoração inferior esquerda */
 }

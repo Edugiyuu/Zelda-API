@@ -6,6 +6,8 @@ const Race = mongoose.model("Race",{
     habitat: String,
     characteristics:String,
     members:String,
+    imgs:[String],
+    id: String
 })
 
 export default Race

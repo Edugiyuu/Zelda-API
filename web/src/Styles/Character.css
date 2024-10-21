@@ -2,7 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    background-color: rgba(27, 27, 27, 0.589);
+    height: 100%;
 }
 
 .CharacterImgs {
@@ -17,10 +18,6 @@
     justify-content: center;
   
     border-radius: 20px;
-    /* background-image: url('../Imgs/Bg/BookIcon.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center; */
    
    
 }
@@ -46,10 +43,6 @@
     width: 200px;
 }
 .CharacterRace{
-   /*  display: flex;
-   flex-direction: row;
-   justify-content: start;
-   align-items: center; */
     background-color: #ccc26b;
     color: white;
     border-radius: 50px;
@@ -89,12 +82,13 @@
     box-shadow: 0px 1px 2px 0px #7f8c8d; */
     color: #515555;
 }
-@media (max-width: 768px) {
+@media (max-width: 888px) {
     .CharacterInfo {
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        height: auto;
     }
     .CharacterImgs img{
         width: 200px;

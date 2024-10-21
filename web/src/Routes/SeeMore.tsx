@@ -49,7 +49,7 @@ const SeeMore = () => {
       <div className='Box'>
         <div className='SideBox'>
           <div className='SideBox2'>
-            <h2>Mais bla bla bla bla</h2>
+            <h2>more bla bla bla bla</h2>
             <p>BLA BLA BLA BLA BLA</p>
           </div>
         </div>
