@@ -19,7 +19,7 @@ const Bosses = () => {
         fetch(`https://zelda.fanapis.com/api/bosses?limit=100`)
             .then((response) => response.json())
             .then((parsedResponse) => {
-                const NomesExcluidos = ["Agitha", "Glutko","Princess Zelda", "Mazura","Big Liar"];
+                const NomesExcluidos = ["Agitha", "Glutko","Princess Zelda", "Mazura","Big Liar","Midna","Moldorm","Big Pengator"];
                 const filteredBosses = parsedResponse.data.filter((boss: { name: string; }) => {
                    //mostra só os nomes e
                     return !NomesExcluidos.includes(boss.name);
@@ -34,7 +34,7 @@ const Bosses = () => {
     return (
         <div >
 
-            <h1 className="BossTitle">Fearsome Enemies of Hyrule.</h1>
+            <h1 className="BossTitle">Fearsome Bosses of Hyrule.</h1>
 
             <div className="AllBosses">
                 {games && games.map((game) => (
@@ -43,7 +43,7 @@ const Bosses = () => {
                         <p>{game.released_date}</p>
                         <img
                             style={{ width: '150px' }}
-                            src={`/Bosses/${game.name.replace(/:/g, '')}.png`}
+                            src={`/Bosses/${game.name}.png`}
 
                         />
                         <Link className="BossCardLink" to={`/games/${game.id}`}>See Game</Link>

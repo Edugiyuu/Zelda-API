@@ -2,7 +2,11 @@
   text-decoration: none;
   font-family: "Lexend"
 }
-
+html, body {
+  margin: 0px;
+  padding: 0px;
+ 
+}
 body{
     background-image: url('./Imgs/Bg/NavBar1.png');
     background-color: rgb(24, 24, 24);

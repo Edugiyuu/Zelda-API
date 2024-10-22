@@ -1,21 +1,14 @@
-html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 .Home {
    background-color: rgb(24, 24, 24);
     width: 100%;
     min-height: 100vh;
+
     display: flex;
     justify-content: center;
     padding: 0px;
     margin: 0px;
-    box-sizing: border-box;
-    color: #ffffff;
+    padding-bottom: 10px; 
+    color: #e9e9e9;
 }
 
 .TitlesAndMore {
@@ -56,22 +49,31 @@ html, body {
 .SimpleBoxes{
     display: flex;
     flex-direction: row;
-    gap: 30px;
-    margin-bottom: 50px;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 60px;
+    margin-bottom: 70px;
 }
 
+.TitlesAndMore .Title{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    margin-bottom: 20px;
+    gap: 50px;
+}
+.TitlesAndMore .Title img{
+    height:20px ;
+}
 @media (max-width: 768px) {
     .Home h1{
         
         background-position:50px; 
         border-bottom: 0px;
     }
-    .Home{
-        background-image: url('');
-        
-        padding-bottom: 10px;
-        margin: 0px;
-    }
+    
     .TitlesAndMore{
         display: flex;
         flex-direction: column;
@@ -90,6 +92,21 @@ html, body {
         width: 230px;
         margin-top: 30px;
     }
-   
+    .SimpleBoxes{
+        display: flex;
+        flex-direction: row;
+        
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+    .TitlesAndMore .Title{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 0px;
+        margin-bottom: 20px;
+        gap: 0px;
+    }
   }
 

@@ -12,16 +12,15 @@
 }
 
 .buttonText:hover {
-    background-color: #292929; /* Muda a cor de fundo ao passar o mouse */
+    background-color: #292929; 
 }
 
 .decoration {
     position: absolute;
     width: 35px;
-    transition: transform 0.3s ease; /* Animação suave na transformação */
+    transition: transform 0.3s ease;
 }
 
-/* Posições iniciais das decorações */
 .decoration.top1 {
     top: -10px; 
     left: -10px;
@@ -44,19 +43,18 @@
     left: -10px;
 }
 
-/* Efeito de hover nas imagens de decoração */
 .buttonText:hover .decoration.top1 {
-    transform: translate(-10px, -10px); /* Move a decoração superior esquerda */
+    transform: translate(-10px, -10px);
 }
 
 .buttonText:hover .decoration.bottom1 {
-    transform: translate(10px, 10px) scaleX(-1); /* Move a decoração inferior direita */
+    transform: translate(10px, 10px) scaleX(-1);
 }
 
 .buttonText:hover .decoration.top2 {
-    transform: translate(10px, -10px) scaleX(-1); /* Move a decoração superior direita */
+    transform: translate(10px, -10px) scaleX(-1);
 }
 
 .buttonText:hover .decoration.bottom2 {
-    transform: translate(-10px, 10px); /* Move a decoração inferior esquerda */
+    transform: translate(-10px, 10px);
 }
