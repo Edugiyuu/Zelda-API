@@ -20,7 +20,7 @@ const Character = () => {
     var [character, setCharacter] = useState<Character>()
 
     useEffect(() => {
-        fetch(`http://localhost:3000/character/${params.character_id}`)
+        fetch(`http://localhost:3000/character/${params.character_name}`)
             .then((response) => response.json())
             .then((parsedResponse) => {
                 console.log(parsedResponse);

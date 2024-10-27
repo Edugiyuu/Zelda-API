@@ -20,11 +20,11 @@ router.get("/game/:id",getGame);
 
 //----------------Characters-----------------
 router.get("/characters",getCharacters);
-router.get("/character/:id",getCharacter);
+router.get("/character/:name",getCharacter);
 //-------------------------------------------
 
 //---------------Races----------------------
 router.get("/races",getRaces);
-router.get("/race/:id",getCharacter);
+router.get("/race/:name",getCharacter);
 //------------------------------------------
 export default router;

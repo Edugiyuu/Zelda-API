@@ -1,11 +1,11 @@
 import Character from "../models/Character.js";
 
 export const getCharacter = async (req, res) => {
-  const id = req.params.id;
+  const name = req.params.name;
 
   try {
    
-    const character = await Character.findOne({ id: id });
+    const character = await Character.findOne({ name: name });
     
     if (!character) {
       return res.status(404).json({ error: 'Pesonagem não encontrado' });

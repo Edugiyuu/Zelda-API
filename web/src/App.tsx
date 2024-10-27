@@ -30,7 +30,7 @@ function App() {
         <Route path="/games/:game_id" element={<Game/>}/>
 
         <Route path="/characters" element={<Characters />} />
-        <Route path="/characters/:character_id" element={<Character/>}/>
+        <Route path="/characters/:character_name" element={<Character/>}/>
 
         <Route path="/bosses" element={<Bosses />} />
         {/* <Route path="/bosses/:bosse_id" element={<Character/>}/> */}

@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react'
 import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import Button from '@mui/material/Button';
+import '../Styles/Races.css'
 
 import img from '../Imgs/Characters/MiniLink.png'
 interface Races {
   name: string,
-
+  description:string,
+  habitat:string,
+  imgs:[string],
+  characteristics:string
 }
 
 function Races() {
@@ -31,42 +33,15 @@ function Races() {
             aria-controls="panel1-content"
             id="panel1-header"
           >
-            Accordion 1
+            {race.name}
             
           </AccordionSummary>
-          <AccordionDetails>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
+          <AccordionDetails className='RacesBox'>
+            <p>{race.description}</p>
+            <p>Habitat:{race.habitat}</p>
+            <p>Characteristics: {race.characteristics}</p>
             <img src={img} alt="" />
           </AccordionDetails>
-        </Accordion><Accordion>
-            <AccordionSummary
-              
-              aria-controls="panel2-content"
-              id="panel2-header"
-            >
-              Accordion 2
-            </AccordionSummary>
-            <AccordionDetails>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-              malesuada lacus ex, sit amet blandit leo lobortis eget.
-            </AccordionDetails>
-          </Accordion><Accordion defaultExpanded>
-            <AccordionSummary
-           
-              aria-controls="panel3-content"
-              id="panel3-header"
-            >
-              Accordion Actions
-            </AccordionSummary>
-            <AccordionDetails>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-              malesuada lacus ex, sit amet blandit leo lobortis eget.
-            </AccordionDetails>
-            <AccordionActions>
-              <Button>Cancel</Button>
-              <Button>Agree</Button>
-            </AccordionActions>
           </Accordion></>
 
       ))}

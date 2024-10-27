@@ -50,8 +50,8 @@ const Characters = () => {
                         />
                         </div>
                         
-                        <Link className="CharactersRaces"to={`/characters/${character.id}`} >{character.race} <img src={elf} alt="" /></Link>
-                        <Link className="CharacterLink" to={`/characters/${character.id}`}>See Character</Link>                      
+                        <Link className="CharactersRaces"to={`/characters/${character.name}`} >{character.race} <img src={elf} alt="" /></Link>
+                        <Link className="CharacterLink" to={`/characters/${character.name}`}>See Character</Link>                      
                     </div>
                 ))}
             </div>
