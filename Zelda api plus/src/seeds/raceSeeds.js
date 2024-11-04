@@ -31,7 +31,7 @@ const races = [
     characteristics: "Humans are for the most part identical to Hylians, with the sole exception being their small, rounded ears in contrast to the Hylians' pointed ears.",
     members: "",
     imgs: [
-      "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/9/9f/HumanSpecies.png/revision/latest?cb=20190321162238&format=original",
+      "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/9/9f/HumanSpecies.png",
     ],
     id: "bvncmdf6ytghvnnbjfigu",
   },
@@ -42,9 +42,9 @@ const races = [
     characteristics: "Hylians have pointed ears, and generally have a wide degree of variety of skin and eye colors.",
     members: "",
     imgs: [
-      "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/c/ca/HylianSpecies.png/revision/latest?cb=20190321161817&format=original",
+      "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/c/ca/HylianSpecies.png",
     ],
-    id: "bvncmdf6ytghvnnbjfigu",
+    id: "rgniefmowvinbubnm",
   },
 
 ];

@@ -3,7 +3,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import '../Styles/Races.css'
-
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import img from '../Imgs/Characters/MiniLink.png'
 interface Races {
   name: string,
@@ -29,7 +29,7 @@ function Races() {
       {races && races.map((race) => (
         <><Accordion>
           <AccordionSummary
-            
+            expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1-content"
             id="panel1-header"
           >
@@ -40,7 +40,10 @@ function Races() {
             <p>{race.description}</p>
             <p>Habitat:{race.habitat}</p>
             <p>Characteristics: {race.characteristics}</p>
-            <img src={img} alt="" />
+           
+            {race.imgs.map((imagem) => (
+              <img src={imagem} alt="" />
+            ))}
           </AccordionDetails>
           </Accordion></>
 
