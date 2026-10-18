@@ -1,70 +1,84 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import '../Styles/Game.css'
-import '../Styles/mobile/Game.css'
-import ColorLink from '../Imgs/Characters/ColorLink.png'
+import Ornaments from '../Components/Ornaments';
+import { ArrowIcon, BackIcon, ChevronIcon, DiamondIcon } from '../Components/Icons';
+import { Game as GameData, gameAsset, getFanGame, getFanGames, getGame, yearOf } from '../api';
 
-interface Game {
-    name: string,
-    developer: string,
-    id: string,
-    description: string,
-    publisher: string,
-    released_date: string
-    game_title_img?: string
-    box_img?: string
-}
+const byDate = (a: GameData, b: GameData) => (Number(yearOf(a.released_date)) || 9999) - (Number(yearOf(b.released_date)) || 9999);
 
 const Game = () => {
-    const params = useParams();
-    var [game, setGame] = useState<Game>()
-    var [newGame, setNewGame] = useState<Game>()
+    const { game_id = '' } = useParams();
+    const [game, setGame] = useState<GameData | null>();
+    const [ours, setOurs] = useState<GameData | null>();
+    const [all, setAll] = useState<GameData[]>([]);
+    const [noArt, setNoArt] = useState<string[]>([]);
 
     useEffect(() => {
-        fetch(`https://zelda.fanapis.com/api/games/${params.game_id}`)
-            .then((response) => response.json())
-            .then((parsedResponse) => {
-                console.log(parsedResponse.data);
-                setGame(parsedResponse.data)
+        setGame(undefined); setOurs(undefined);
+        getFanGame(game_id).then(setGame).catch(() => setGame(null));
+        getGame(game_id).then(setOurs).catch(() => setOurs(null));
+    }, [game_id]);
+    useEffect(() => { getFanGames().then((list) => setAll(list.sort(byDate))).catch(() => setAll([])); }, []);
 
-            })
-    }, []);
-    useEffect(() => {
-        fetch(`http://localhost:3000/game/${params.game_id}`)
-            .then((response) => response.json())
-            .then((parsedResponse) => {
-                console.log(parsedResponse);
-                setNewGame(parsedResponse)
+    const display = game || ours;
+    if (!display) {
+        return <main className="page container"><p className="loading">{game === undefined || ours === undefined ? 'Consulting the Sheikah Slate…' : 'This legend could not be found.'}</p></main>;
+    }
 
-            })
-    }, []);
-    const displayGame = game || newGame;
+    const index = all.findIndex((g) => g.id === display.id);
+    const next = index >= 0 ? all[index + 1] : undefined;
+    const year = Number(yearOf(display.released_date));
+    const related = all
+        .filter((g) => g.id !== display.id && !noArt.includes(g.id))
+        .sort((a, b) => Math.abs(Number(yearOf(a.released_date)) - year) - Math.abs(Number(yearOf(b.released_date)) - year))
+        .slice(0, 5);
+    const facts = [['Released', display.released_date], ['Developer', display.developer], ['Publisher', display.publisher]];
+
     return (
-        <div className='GameAbout' >
-            {displayGame &&
-                <div key={displayGame.id} className="GameInfo">
-                     <div className='GameImgs'>
-                        <img className='GameTitleLogo' src={newGame?.game_title_img ||`/GameIcons/${game?.name.replace(/:/g, '')}.png`} />
-                        <img className='BoxArt' src={ newGame?.box_img || `/BoxArt/${game?.name.replace(/:/g, '')}.png`} />
-                        {/* <img style={{width:'100px'}} src={ColorLink} alt="" /> */}
-                    </div>
-
-                    <div>
-                        
-                    </div>
-                    <div className='About'>
-                        <h1>{displayGame.name}</h1>
-                        <p>Released date: {displayGame.released_date}</p>
-                        <p>{displayGame.description}</p>
-                        <p>Developer: {displayGame.developer}</p>
-                        <p>Publisher: {displayGame.publisher}</p>
+        <main className="texture-waves waves-tall">
+            <section className="game-hero">
+                <div className="container">
+                    <nav className="crumbs"><Link to="/games">Games</Link><ChevronIcon /><b>{display.name.replace('The Legend of Zelda: ', '')}</b></nav>
+                    <div className="game-detail">
+                        <div className="game-boxart">
+                            <img src={ours?.box_img || gameAsset('BoxArt', display.name)} alt={`${display.name} box art`} />
+                            <Ornaments />
+                        </div>
+                        <div className="game-info">
+                            <img className="game-title-logo" src={ours?.game_title_img || gameAsset('GameIcons', display.name)} alt="" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                            <h1>{display.name}</h1>
+                            <div className="facts">
+                                {facts.map(([label, value]) => <div className="fact" key={label}><span>{label}</span><b>{value || 'Unknown'}</b></div>)}
+                            </div>
+                            <div className="game-about">
+                                <h4>About the game</h4>
+                                <p>{display.description}</p>
+                            </div>
+                            <div className="game-actions">
+                                <Link to="/games" className="btn btn-dark"><BackIcon /> Back to games</Link>
+                                {next && <Link to={`/games/${next.id}`} className="btn btn-gold">Next: {next.name.replace('The Legend of Zelda: ', '')} <ArrowIcon /></Link>}
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </section>
 
-            }
-
-        </div>
-
+            {related.length > 0 && (
+                <section className="container related-games">
+                    <div className="section-head"><div><p className="eyebrow cyan"><DiamondIcon />More from the series</p><h2>Continue the legend</h2></div></div>
+                    <div className="covers">
+                        {related.map((g) => (
+                            <Link to={`/games/${g.id}`} className="cover" key={g.id}>
+                                <img src={gameAsset('BoxArt', g.name)} alt={g.name} onError={() => setNoArt((ids) => [...ids, g.id])} loading="lazy" />
+                                <h4>{g.name.replace('The Legend of Zelda: ', '')}</h4>
+                                <span>{yearOf(g.released_date)} · {g.publisher}</span>
+                            </Link>
+                        ))}
+                    </div>
+                </section>
+            )}
+        </main>
     )
 }
 

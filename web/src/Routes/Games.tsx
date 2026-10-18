@@ -1,88 +1,94 @@
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useMemo, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import '../Styles/Games.css'
-import { Link } from "react-router-dom";
-import axios from "axios";
+import PageHead from "../Components/PageHead";
+import { ArrowIcon, SearchIcon } from "../Components/Icons";
+import { compendiumNo, Game, gameAsset, getAllGames, yearOf } from "../api";
 
-interface Games {
-    id: string
-    name: string
-    released_date: string
-    game_title_img?: string
-}
-/* 
-   1- https://zelda.fandom.com/api.php?action=query&titles=The%20Legend%20of%20Zelda&prop=images&format=json
-   2- https://zelda.fandom.com/api.php?action=query&titles=File:LoZ%20International%20Logo.png&prop=imageinfo&iiprop=url&format=json
-*/
+const PAGE_SIZE = 15;
+const eras = [
+    { label: 'All', test: () => true },
+    { label: '1980s', test: (y: number) => y < 1990 },
+    { label: '1990s', test: (y: number) => y >= 1990 && y < 2000 },
+    { label: '2000s', test: (y: number) => y >= 2000 && y < 2010 },
+    { label: '2010s+', test: (y: number) => y >= 2010 },
+];
+
+/** Falls back to the logo stored in our database, then hides the image. */
+const logoFallback = (game: Game) => (event: SyntheticEvent<HTMLImageElement>) => {
+    const img = event.currentTarget;
+    if (game.game_title_img && img.src !== game.game_title_img) img.src = game.game_title_img;
+    else img.style.visibility = 'hidden';
+};
 
 const Games = () => {
-    var [games, setGames] = useState<Games[]>([])
-    var [newGames, setNewGames] = useState<Games[]>([])
+    const [params, setParams] = useSearchParams();
+    const [games, setGames] = useState<Game[] | null>(null);
+    const [query, setQuery] = useState(params.get('q') ?? '');
+    const [era, setEra] = useState(0);
+    const [sort, setSort] = useState('date');
+    const [shown, setShown] = useState(PAGE_SIZE);
 
-
-    useEffect(() => {
-        fetch(`https://zelda.fanapis.com/api/games?limit=100`)
-            .then((response) => response.json())
-            .then((parsedResponse) => {
-                console.log(parsedResponse.data);
-                setGames(parsedResponse.data)
-
-            })
-    }, []);
+    useEffect(() => { setQuery(params.get('q') ?? ''); }, [params]);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/games`)
-            .then((response) => response.json())
-            .then((parsedResponse) => {
-                console.log(parsedResponse);
-                setNewGames(parsedResponse)
-
-            })
+        getAllGames().then(setGames);
     }, []);
-    /*     
-    useEffect(()  => {
-        axios.get('http://localhost:3000/games')
-      .then(response => {
-        console.log(response.data);
-        setNewGames(response.data.data)
-      }, error => {
-        console.log(error);
-      });
-    }, []); */
+
+    const list = useMemo(() => {
+        const term = query.trim().toLowerCase();
+        return (games ?? [])
+            .filter((g) => g.name.toLowerCase().includes(term))
+            .filter((g) => eras[era].test(Number(yearOf(g.released_date)) || 0))
+            .sort((a, b) => sort === 'name' ? a.name.localeCompare(b.name) : (Number(yearOf(a.released_date)) || 9999) - (Number(yearOf(b.released_date)) || 9999));
+    }, [games, query, era, sort]);
+
+    useEffect(() => { setShown(PAGE_SIZE); }, [query, era, sort]);
 
     return (
-        <div >
+        <main className="page container texture-waves waves-short">
+            <PageHead eyebrow="The chronicles" title="A Universe of Zelda Games" lead="Four decades of adventures across Hyrule and beyond. Browse every release, remake and spin-off." />
 
-            <h1 className="GameTitle">A Universe of Zelda Games</h1>
+            <div className="toolbar">
+                <form className="searchbox" onSubmit={(e) => { e.preventDefault(); setParams(query ? { q: query } : {}); }}>
+                    <label><SearchIcon /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search for a game…" /></label>
+                    <button type="submit">Search</button>
+                </form>
+                <div className="chips">
+                    {eras.map((e, i) => <button key={e.label} className={`chip ${i === era ? 'on' : ''}`} onClick={() => setEra(i)}>{e.label}</button>)}
+                </div>
+                <label className="select">Sort by
+                    <select value={sort} onChange={(e) => setSort(e.target.value)}>
+                        <option value="date">Release date</option>
+                        <option value="name">Name</option>
+                    </select>
+                </label>
+            </div>
 
-            <div className="AllGames">
-                {games && games.map((game) => (
-                    <div key={game.id} className="GameCard">
-                        <h2>{game.name}</h2>
-                        <p>{game.released_date}</p>
-                        <img
-                            style={{ width: '150px' }}
-                            src={`/GameIcons/${game.name.replace(/:/g, '')}.png`}
+            {!games && <p className="loading">Consulting the Sheikah Slate…</p>}
+            {games && list.length === 0 && <p className="empty">No game found for “{query}”.</p>}
 
-                        />
-                        <Link className="GameCardLink" to={`/games/${game.id}`}>See Game</Link>
-
-                    </div>
-                ))}
-                {newGames && newGames.map((game) => (
-                    <div key={game.id} className="GameCard">
-                        <h3>{game.name}</h3>
-                        <p>{game.released_date}</p>
-                        <img
-                            src={game.game_title_img}
-
-                        />
-                        <Link className="GameCardLink" to={`/games/${game.id}`}>See Game</Link>
-
-                    </div>
+            <div className="grid">
+                {list.slice(0, shown).map((game, i) => (
+                    <Link to={`/games/${game.id}`} className="game-card" key={game.id}>
+                        <div className="game-logo">
+                            <img src={gameAsset('GameIcons', game.name)} onError={logoFallback(game)} alt={game.name} loading="lazy" />
+                        </div>
+                        <span className="no">{compendiumNo(i)}</span>
+                        <h3>{game.name.replace('The Legend of Zelda: ', '')}</h3>
+                        <div className="game-meta"><span>{game.developer}</span><b>{yearOf(game.released_date)}</b></div>
+                        <span className="game-cta">See Game <ArrowIcon /></span>
+                    </Link>
                 ))}
             </div>
 
-        </div>
+            {list.length > 0 && (
+                <div className="more-row">
+                    <span>Showing {Math.min(shown, list.length)} of {list.length} games</span>
+                    {shown < list.length && <button className="btn btn-dark" onClick={() => setShown(shown + PAGE_SIZE)}>Load more games</button>}
+                </div>
+            )}
+        </main>
     )
 }
 
