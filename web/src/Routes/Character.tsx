@@ -8,7 +8,7 @@ import { Character as CharacterData, characterImage, getCharacter, getCharacters
 const BIO_PREVIEW = 600;
 
 const Character = () => {
-    const { character_name = '' } = useParams();
+    const { character_id = '' } = useParams();
     const [character, setCharacter] = useState<CharacterData | null>();
     const [others, setOthers] = useState<CharacterData[]>([]);
     const [selected, setSelected] = useState<string>();
@@ -16,8 +16,8 @@ const Character = () => {
 
     useEffect(() => {
         setCharacter(undefined); setSelected(undefined); setExpanded(false);
-        getCharacter(character_name).then(setCharacter).catch(() => setCharacter(null));
-    }, [character_name]);
+        getCharacter(character_id).then(setCharacter).catch(() => setCharacter(null));
+    }, [character_id]);
     useEffect(() => { getCharacters().then(setOthers).catch(() => setOthers([])); }, []);
 
     if (!character) {
@@ -26,8 +26,8 @@ const Character = () => {
 
     const portrait = selected ?? characterImage(character);
     const related = [
-        ...others.filter((c) => c.name !== character.name && c.race === character.race),
-        ...others.filter((c) => c.name !== character.name && c.race !== character.race),
+        ...others.filter((c) => c.id !== character.id && c.race_id === character.race_id),
+        ...others.filter((c) => c.id !== character.id && c.race_id !== character.race_id),
     ].slice(0, 5);
     const bio = expanded || character.description.length <= BIO_PREVIEW ? character.description : `${character.description.slice(0, BIO_PREVIEW)}…`;
     const facts = [['Race', character.race], ['Gender', character.gender], ['Age', character.age]];
@@ -61,7 +61,7 @@ const Character = () => {
                     <div className="facts">
                         {facts.map(([label, value]) => (
                             <div className="fact" key={label}><span>{label}</span>
-                                <b>{label === 'Race' && <img src={elf} alt="" />}{label === 'Race' ? <Link to="/races">{value}</Link> : value || 'Unknown'}</b>
+                                <b>{label === 'Race' && <img src={elf} alt="" />}{label === 'Race' && value ? <Link to="/races">{value}</Link> : value || 'Unknown'}</b>
                             </div>
                         ))}
                     </div>
@@ -74,7 +74,7 @@ const Character = () => {
                         <h4><DiamondIcon />Related characters</h4>
                         <div className="related-characters">
                             {related.map((c) => (
-                                <Link to={`/characters/${c.name}`} className="related-character" key={c.name}>
+                                <Link to={`/characters/${c.id}`} className="related-character" key={c.id}>
                                     <img src={characterImage(c)} alt="" onError={(e) => { if (c.visuals[0] && e.currentTarget.src !== c.visuals[0]) e.currentTarget.src = c.visuals[0]; }} />
                                     <b>{c.name}</b>
                                 </Link>

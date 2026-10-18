@@ -1,0 +1,92 @@
+// Schema do Hyrule Compendium (PostgreSQL).
+// Nomes de campos em snake_case = mesmos nomes das colunas e do JSON que o front consome.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Race {
+  id              Int         @id @default(autoincrement())
+  name            String      @unique
+  description     String?
+  habitat         String?
+  characteristics String?
+  imgs            String[]
+
+  characters      Character[]
+
+  @@map("races")
+}
+
+model Character {
+  id          Int          @id @default(autoincrement())
+  name        String       @unique
+  description String?
+  age         String?
+  gender      String?
+  visuals     String[]
+
+  // 1:N — cada personagem tem (no máximo) uma raça
+  race_id     Int?
+  race        Race?        @relation(fields: [race_id], references: [id])
+
+  appearances Appearance[]
+
+  @@map("characters")
+}
+
+model Game {
+  id             Int          @id @default(autoincrement())
+  name           String       @unique
+  description    String?
+  developer      String?
+  publisher      String?
+  released_date  String?
+  box_img        String?
+  game_title_img String?
+
+  appearances    Appearance[]
+  bosses         BossAppearance[]
+
+  @@map("games")
+}
+
+// N:N — tabela de junção "aparições": em quais jogos cada personagem aparece
+model Appearance {
+  character_id Int
+  game_id      Int
+
+  character    Character @relation(fields: [character_id], references: [id], onDelete: Cascade)
+  game         Game      @relation(fields: [game_id], references: [id], onDelete: Cascade)
+
+  // o par é a chave primária: o mesmo personagem não aparece duas vezes no mesmo jogo
+  @@id([character_id, game_id])
+  @@map("appearances")
+}
+
+model Boss {
+  id          Int              @id @default(autoincrement())
+  name        String           @unique
+  description String?
+
+  appearances BossAppearance[]
+
+  @@map("bosses")
+}
+
+// N:N — em quais jogos cada boss aparece
+model BossAppearance {
+  boss_id Int
+  game_id Int
+
+  boss    Boss @relation(fields: [boss_id], references: [id], onDelete: Cascade)
+  game    Game @relation(fields: [game_id], references: [id], onDelete: Cascade)
+
+  @@id([boss_id, game_id])
+  @@map("boss_appearances")
+}

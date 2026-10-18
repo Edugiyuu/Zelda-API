@@ -1,67 +1,70 @@
-export const API_URL = 'http://localhost:3000';
-export const FAN_API_URL = 'https://zelda.fanapis.com/api';
+export const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000';
+
+/** A related record, as embedded by the API ({ id, name }). */
+export interface Ref {
+    id: number
+    name: string
+}
 
 export interface Game {
-    id: string
+    id: number
     name: string
     description: string
     developer: string
     publisher: string
     released_date: string
-    game_title_img?: string
-    box_img?: string
+    game_title_img?: string | null
+    box_img?: string | null
+    /** Only on GET /games/:id. */
+    characters?: Ref[]
+    bosses?: Ref[]
 }
 
 export interface Character {
-    id: string
+    id: number
     name: string
     description: string
     age: string
     gender: string
-    race: string
+    race_id: number | null
+    race: string | null
     visuals: string[]
+    /** Only on GET /characters/:id. */
+    games?: Ref[]
 }
 
+/** Races without a description are only known by name (characters cite them, but there is no entry yet). */
 export interface Race {
-    id: string
+    id: number
     name: string
-    description: string
-    habitat: string
-    characteristics: string
+    description: string | null
+    habitat: string | null
+    characteristics: string | null
     imgs: string[]
+    members: Ref[]
 }
 
 export interface Boss {
-    id: string
+    id: number
     name: string
     description: string
-    appearances: string[]
+    games: Ref[]
 }
 
-const getJson = <T,>(url: string): Promise<T> => fetch(url).then((response) => response.json());
+const getJson = <T,>(url: string): Promise<T> => fetch(url).then((response) => {
+    if (!response.ok) throw new Error(`${response.status} ${url}`);
+    return response.json();
+});
 
-export const getFanGames = () => getJson<{ data: Game[] }>(`${FAN_API_URL}/games?limit=100`).then((r) => r.data);
-export const getFanGame = (id: string) => getJson<{ data: Game | null }>(`${FAN_API_URL}/games/${id}`).then((r) => r.data);
-export const getFanBosses = () => getJson<{ data: Boss[] }>(`${FAN_API_URL}/bosses?limit=100`).then((r) => r.data);
 export const getGames = () => getJson<Game[]>(`${API_URL}/games`);
-export const getGame = (id: string) => getJson<Game | null>(`${API_URL}/game/${id}`);
+export const getGame = (id: string | number) => getJson<Game>(`${API_URL}/games/${id}`);
 export const getCharacters = () => getJson<Character[]>(`${API_URL}/characters`);
-export const getCharacter = (name: string) => getJson<Character | null>(`${API_URL}/character/${name}`);
+export const getCharacter = (id: string | number) => getJson<Character>(`${API_URL}/characters/${id}`);
 export const getRaces = () => getJson<Race[]>(`${API_URL}/races`);
-
-/** Fan API games plus the ones only stored in our database (deduplicated by name). */
-export const getAllGames = () => Promise.all([getFanGames().catch(() => [] as Game[]), getGames().catch(() => [] as Game[])])
-    .then(([fan, ours]) => {
-        const names = new Set(fan.map((g) => g.name));
-        return [...fan, ...ours.filter((g) => !names.has(g.name))];
-    });
-
-// Entries the fan API lists as bosses that are not really foes (or have no art yet).
-const NOT_BOSSES = ["Agitha", "Glutko", "Princess Zelda", "Mazura", "Big Liar", "Midna", "Moldorm", "Big Pengator"];
-export const getBosses = () => getFanBosses().then((list) => list.filter((b) => !NOT_BOSSES.includes(b.name)));
+export const getBosses = () => getJson<Boss[]>(`${API_URL}/bosses`);
 
 /** Local art in /public is named after the game without the ":" characters. */
 export const gameAsset = (folder: 'GameIcons' | 'BoxArt', name: string) => `/${folder}/${name.replace(/:/g, '')}.png`;
-export const characterImage = (character: Character) => `/Characters/${character.name}.png`;
+export const characterImage = (character: Pick<Character, 'name'>) => `/Characters/${character.name}.png`;
 export const yearOf = (date: string) => (String(date || '').match(/\d{4}/) || [''])[0];
 export const compendiumNo = (index: number, digits = 3) => `No. ${String(index + 1).padStart(digits, '0')}`;

@@ -3,27 +3,24 @@ import { Link, useParams } from 'react-router-dom';
 import '../Styles/Game.css'
 import Ornaments from '../Components/Ornaments';
 import { ArrowIcon, BackIcon, ChevronIcon, DiamondIcon } from '../Components/Icons';
-import { Game as GameData, gameAsset, getFanGame, getFanGames, getGame, yearOf } from '../api';
+import { Game as GameData, gameAsset, getGame, getGames, yearOf } from '../api';
 
 const byDate = (a: GameData, b: GameData) => (Number(yearOf(a.released_date)) || 9999) - (Number(yearOf(b.released_date)) || 9999);
 
 const Game = () => {
     const { game_id = '' } = useParams();
-    const [game, setGame] = useState<GameData | null>();
-    const [ours, setOurs] = useState<GameData | null>();
+    const [display, setGame] = useState<GameData | null>();
     const [all, setAll] = useState<GameData[]>([]);
-    const [noArt, setNoArt] = useState<string[]>([]);
+    const [noArt, setNoArt] = useState<number[]>([]);
 
     useEffect(() => {
-        setGame(undefined); setOurs(undefined);
-        getFanGame(game_id).then(setGame).catch(() => setGame(null));
-        getGame(game_id).then(setOurs).catch(() => setOurs(null));
+        setGame(undefined);
+        getGame(game_id).then(setGame).catch(() => setGame(null));
     }, [game_id]);
-    useEffect(() => { getFanGames().then((list) => setAll(list.sort(byDate))).catch(() => setAll([])); }, []);
+    useEffect(() => { getGames().then((list) => setAll(list.sort(byDate))).catch(() => setAll([])); }, []);
 
-    const display = game || ours;
     if (!display) {
-        return <main className="page container"><p className="loading">{game === undefined || ours === undefined ? 'Consulting the Sheikah Slate…' : 'This legend could not be found.'}</p></main>;
+        return <main className="page container"><p className="loading">{display === undefined ? 'Consulting the Sheikah Slate…' : 'This legend could not be found.'}</p></main>;
     }
 
     const index = all.findIndex((g) => g.id === display.id);
@@ -42,11 +39,11 @@ const Game = () => {
                     <nav className="crumbs"><Link to="/games">Games</Link><ChevronIcon /><b>{display.name.replace('The Legend of Zelda: ', '')}</b></nav>
                     <div className="game-detail">
                         <div className="game-boxart">
-                            <img src={ours?.box_img || gameAsset('BoxArt', display.name)} alt={`${display.name} box art`} />
+                            <img src={display.box_img || gameAsset('BoxArt', display.name)} alt={`${display.name} box art`} />
                             <Ornaments />
                         </div>
                         <div className="game-info">
-                            <img className="game-title-logo" src={ours?.game_title_img || gameAsset('GameIcons', display.name)} alt="" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                            <img className="game-title-logo" src={display.game_title_img || gameAsset('GameIcons', display.name)} alt="" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
                             <h1>{display.name}</h1>
                             <div className="facts">
                                 {facts.map(([label, value]) => <div className="fact" key={label}><span>{label}</span><b>{value || 'Unknown'}</b></div>)}

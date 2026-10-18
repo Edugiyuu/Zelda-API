@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import '../Styles/Games.css'
 import PageHead from "../Components/PageHead";
 import { ArrowIcon, SearchIcon } from "../Components/Icons";
-import { compendiumNo, Game, gameAsset, getAllGames, yearOf } from "../api";
+import { compendiumNo, Game, gameAsset, getGames, yearOf } from "../api";
 
 const PAGE_SIZE = 15;
 const eras = [
@@ -32,7 +32,7 @@ const Games = () => {
     useEffect(() => { setQuery(params.get('q') ?? ''); }, [params]);
 
     useEffect(() => {
-        getAllGames().then(setGames);
+        getGames().then(setGames).catch(() => setGames([]));
     }, []);
 
     const list = useMemo(() => {

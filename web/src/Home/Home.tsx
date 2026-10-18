@@ -8,7 +8,7 @@ import CharactersBg from '../Imgs/Bg/ZeldaHome5.jpg'
 import EnemiesBg from '../Imgs/Bg/ZeldaHome6.jpg'
 import Ornaments from '../Components/Ornaments';
 import { ArrowIcon, DiamondIcon } from '../Components/Icons';
-import { Game, gameAsset, getAllGames, getBosses, getCharacters, getFanGames, getRaces, yearOf } from '../api';
+import { Game, gameAsset, getBosses, getCharacters, getGames, getRaces, yearOf } from '../api';
 
 const paths = [
     { img: GamesBg, tag: 'Games', title: 'Explore the Games', text: 'Discover every Zelda game, from the original NES classic to the latest releases.', go: 'Explore games', to: '/games' },
@@ -16,7 +16,7 @@ const paths = [
     { img: EnemiesBg, tag: 'Bestiary', title: 'Face the Enemies', text: 'Dive into the vast array of enemies and bosses, with strategies to defeat them.', go: 'Face enemies', to: '/bosses' },
 ];
 const featured = ['Breath of the Wild', 'Tears of the Kingdom', 'Ocarina of Time', "Majora's Mask", 'The Wind Waker'];
-const endpoints = ['/games', '/game/:id', '/characters', '/character/:name', '/races'];
+const endpoints = ['/games', '/games/:id', '/characters', '/characters/:id', '/races', '/bosses'];
 
 const count = (promise: Promise<unknown[]>) => promise.then((list) => list.length).catch(() => null);
 
@@ -25,8 +25,8 @@ const Home = () => {
     const [stats, setStats] = useState<(number | null)[]>([null, null, null, null]);
 
     useEffect(() => {
-        getFanGames().then(setGames).catch(() => setGames([]));
-        Promise.all([count(getAllGames()), count(getCharacters()), count(getBosses()), count(getRaces())]).then(setStats);
+        getGames().then(setGames).catch(() => setGames([]));
+        Promise.all([count(getGames()), count(getCharacters()), count(getBosses()), count(getRaces())]).then(setStats);
     }, []);
 
     const covers = featured.map((title) => ({ title, game: games.find((g) => g.name === `The Legend of Zelda: ${title}`) }));
@@ -96,7 +96,7 @@ const Home = () => {
                     <img className="dev-sword" src={MasterSword} alt="" />
                     <p className="eyebrow cyan"><DiamondIcon />For developers</p>
                     <h2>A REST API forged for Hyrule</h2>
-                    <p className="dev-text">Query games, characters and races from a Node + Express API backed by MongoDB. Simple JSON, no keys required.</p>
+                    <p className="dev-text">Query games, characters, races and bosses from a Node + Express API backed by PostgreSQL. Simple JSON, no keys required.</p>
                     <div className="endpoints">
                         {endpoints.map((endpoint) => <code className="endpoint" key={endpoint}><b>GET</b>{endpoint}</code>)}
                     </div>

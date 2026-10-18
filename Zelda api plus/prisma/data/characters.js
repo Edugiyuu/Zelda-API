@@ -1,38 +1,11 @@
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import Character from '../models/Character.js';
-
-dotenv.config();
-
-const dbUser = process.env.DB_USER;
-const dbPassword = process.env.DB_PASS;
-
-mongoose.connect(`mongodb+srv://${dbUser}:${dbPassword}@cluster0.4mdpo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`,)
-.then(() => {
-  console.log('Conectou ao mongoDB');
-  seedCharacters();
-}).catch((err) => {
-  console.error('Erro', err);
-});
-/* {
-    name: "",
-    description: "",
-    age: "",
-    gender: "",
-    race: "",
-    id: "",
-    visuals: [
-        '',
-    ]
-}, */
-const characters = [
+// Dados vindos do antigo seed do MongoDB (characterSeeds.js).
+export default [
     {
         name: "Zelda",
         description: "Zelda traditionally Princess Zelda, is the eponymous deuteragonist of The Legend of Zelda series. With the exception of Link's Awakening, Majora's Mask, and Tri Force Heroes, an incarnation of Zelda or one of her alter egos (such as Tetra) has always been one of the central characters in the series. Usually but not always, Princess Zelda is the one who sends Link on his mission to save Hyrule and assists him in defeating Ganon. She is also often the possessor of the Triforce of Wisdom. Much like Link, various Princess Zeldas have appeared across the history of Hyrule. While each Zelda is a distinct individual, the fundamental soul of Zelda has endured from one incarnation to the next.",
         age: "Unknown (varies between games)",
         gender: "Female",
         race: "Hylian",
-        id: "002ijf20je10293lzb08",
         visuals: [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/1/1d/SS_Zelda_Artwork.png' ,
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/a/af/OoS_Zelda_Artwork.png' ,
@@ -45,7 +18,6 @@ const characters = [
         age: "Unknown (varies between games)",
         gender: "Male",
         race: "Hylian",
-        id: "vipkoqwdojfwif01",
         visuals: [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/7/7c/OoT_Child_Link_Artwork.png',
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/2/29/OoT_Link_Artwork.png',
@@ -62,7 +34,6 @@ const characters = [
         age: "Unknown",
         gender: "Female",
         race: "Hylian",
-        id: "po2i23uy6trf3951nv1",
         visuals: [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/2/28/OoT_Malon_Artwork.png',
         ]
@@ -73,7 +44,6 @@ const characters = [
         age: "Unknown",
         gender: "Unknown",
         race: "Kokiri",
-        id: "09nbvmkde948tughd21",
         visuals: [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/8/84/MM_Skull_Kid_Artwork.png',
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/2/21/MM3D_Skull_Kid_Artwork.png'
@@ -85,7 +55,6 @@ const characters = [
         age: "Unknown",
         gender: "Male",
         race: "Hylian",
-        id: "0olh7vbnfd823mewki12",
         visuals: [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/9/98/MM3D_Happy_Mask_Salesman_Artwork.png',
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/5/50/MM_Happy_Mask_Salesman_Artwork.png'
@@ -97,7 +66,6 @@ const characters = [
         age: "Unknown",
         gender: "Female",
         race: "Fairy",
-        id: "6e7gvwycqh8xujii1",
         visuals: [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/0/08/OoT3D_Navi_Artwork.png',
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/1/1e/OoT3D_Navi_Render.png'
@@ -109,7 +77,6 @@ const characters = [
         age: "Unknown",
         gender: "Female",
         race: "Hylian",
-        id: "x5c6nhg3f290bmoaie",
         visuals: [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/3/3f/MM3D_Cremia_Model.png',
         ]
@@ -120,7 +87,6 @@ const characters = [
         age: "Unknown",
         gender: "Male",
         race: "Hylian",
-        id: "45d678bgfdnbhjck",
         visuals: [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/e/e8/MM3D_Kafei_Model.png',
         ]
@@ -131,7 +97,6 @@ const characters = [
         age: "Unknown",
         gender: "Male",
         race: "Hylian",
-        id: "3erfgnko987trdfvbnk",
         visuals: [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/f/f9/OoT3D_Rauru_Model.png',
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/b/b5/OoT_Rauru.png',
@@ -143,7 +108,6 @@ const characters = [
         age: "Unknown",
         gender: "Female",
         race: "Human",
-        id: "ihd2qon4vz6g2h8",
         visuals: [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/8/89/LADX_Marin_Artwork.png',
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/2/22/LA_Marin_Artwork.png',
@@ -156,7 +120,6 @@ const characters = [
         age: "Unknown",
         gender: "Female",
         race: "Gerudo",
-        id: "b2vuuncd1vcb18hb",
         visuals: [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/1/1e/OoT_Nabooru_Artwork.png',
         ]
@@ -167,7 +130,6 @@ const characters = [
         age: "Unknown",
         gender: "Male",
         race: "Demonic",
-        id: "8l7kujtyhreww1wf",
         visuals: [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/f/fc/SS_Ghirahim_Artwork.png',
         ]
@@ -178,7 +140,6 @@ const characters = [
         age: "Unknown",
         gender: "Female",
         race: "Fairy",
-        id: "7kj6h5g4rf0u8houin",
         visuals: [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/2/21/MM3D_Great_Fairy_Artwork.png',
         ]
@@ -189,7 +150,6 @@ const characters = [
         age: "Unknown",
         gender: "Female",
         race: "Kokiri",
-        id: "0987ytrfdvgh2gs",
         visuals: [
             'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/c/c3/OoT3D_Saria_Model.png',
         ]
@@ -198,13 +158,3 @@ const characters = [
     
   
 ];
-
-async function seedCharacters() {
-  try {
-    await Character.insertMany(characters);
-    console.log('Dados inseridos com sucesso!');
-    mongoose.disconnect();
-  } catch (error) {
-    console.error('Erro ao inserir dados:', error);
-  }
-}

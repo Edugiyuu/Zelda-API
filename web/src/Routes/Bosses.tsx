@@ -10,7 +10,7 @@ const PAGE_SIZE = 15;
 const Bosses = () => {
     const [params, setParams] = useSearchParams();
     const [bosses, setBosses] = useState<Boss[] | null>(null);
-    const [noArt, setNoArt] = useState<string[]>([]);
+    const [noArt, setNoArt] = useState<number[]>([]);
     const [query, setQuery] = useState(params.get('q') ?? '');
     const [sort, setSort] = useState('az');
     const [shown, setShown] = useState(PAGE_SIZE);
@@ -22,7 +22,7 @@ const Bosses = () => {
 
     const list = useMemo(() => (bosses ?? [])
         .filter((b) => !noArt.includes(b.id) && b.name.toLowerCase().includes(query.trim().toLowerCase()))
-        .sort((a, b) => sort === 'az' ? a.name.localeCompare(b.name) : sort === 'za' ? b.name.localeCompare(a.name) : b.appearances.length - a.appearances.length),
+        .sort((a, b) => sort === 'az' ? a.name.localeCompare(b.name) : sort === 'za' ? b.name.localeCompare(a.name) : b.games.length - a.games.length),
         [bosses, noArt, query, sort]);
 
     useEffect(() => { setShown(PAGE_SIZE); }, [query, sort]);
@@ -67,7 +67,7 @@ const Bosses = () => {
                             <div className="boss-body">
                                 <span className="no">{compendiumNo(i)}</span>
                                 <h3>{boss.name}</h3>
-                                <span className="pill red">{Math.max(1, boss.appearances.length)} game{boss.appearances.length > 1 ? 's' : ''}</span>
+                                <span className="pill red">{Math.max(1, boss.games.length)} game{boss.games.length > 1 ? 's' : ''}</span>
                             </div>
                         </article>
                     ))}

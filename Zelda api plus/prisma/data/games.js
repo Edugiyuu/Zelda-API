@@ -1,30 +1,5 @@
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-import Game from '../models/Game.js';
-
-dotenv.config();
-
-const dbUser = process.env.DB_USER;
-const dbPassword = process.env.DB_PASS;
-
-mongoose.connect(`mongodb+srv://${dbUser}:${dbPassword}@cluster0.4mdpo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`,)
-.then(() => {
-  console.log('Conectou ao mongoDB');
-  seedGames();
-}).catch((err) => {
-  console.error('Erro', err);
-});
-/* {
-  name: "",
-  description: "",
-  developer: "",
-  publisher: "",
-  released_date: "",
-  box_img: "",
-  game_title_img: "",
-  id: ""
-}, */
-const games = [
+// Dados vindos do antigo seed do MongoDB (gameSeeds.js).
+export default [
   {
     name: "The Legend of Zelda: Tears of the Kingdom",
     description: "The announcement of Tears of the Kingdom under the name Breath of the Wild 2 which Nintendo Called at the time The Sequel to Breath of the Wild was celebrated by fans across the world...",
@@ -33,7 +8,6 @@ const games = [
     released_date: "May 12, 2023",
     box_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/9/9f/The_Legend_of_Zelda_TOTK_%28NA_cover_art%29.png",
     game_title_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/4/4c/TotK_English_Logo.png",
-    id: "g3fo2jfo5khnvs93iff2v6"
   },
   {
     name: "The Legend of Zelda: Link's Awakening (Nintendo Switch)",
@@ -43,7 +17,6 @@ const games = [
     released_date: "September 20, 2019",
     box_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/5/55/LANS_NA_Box_Art.png",
     game_title_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/7/70/LANS_English_Logo_2.png",
-    id: "ho29g0vjs0e20gj10vbq"
   },
   {
     name: "The Legend of Zelda: Majora's Mask 3D",
@@ -53,7 +26,6 @@ const games = [
     released_date: "February 13, 2015",
     box_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/a/a5/MM3D_NA_Box_Art.png",
     game_title_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/c/c5/MM3D_English_Logo.png",
-    id: "ovh10jv1fob2v71pva11"
   },
   {
     name: "The Legend of Zelda: Ocarina of Time 3D",
@@ -63,7 +35,6 @@ const games = [
     released_date: "June 19, 2011",
     box_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/8/88/OoT_3D_Box_Art.png",
     game_title_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/1/14/OoT3D_English_Logo.png",
-    id: "niu12h9d12jd01cgr"
   },
   {
     name: "The Legend of Zelda: The Wind Waker HD",
@@ -73,7 +44,6 @@ const games = [
     released_date: "September 20, 2013",
     box_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/c/c8/TWWHD_Boxart.png",
     game_title_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/8/80/TWWHD_English_Logo.png",
-    id: "v1f91u401fc0g8195g"
   },
   {
     name: "The Legend of Zelda: Twilight Princess HD",
@@ -83,7 +53,6 @@ const games = [
     released_date: "March 4, 2016",
     box_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/4/42/TPHD_NA_Box_Art.png",
     game_title_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/0/01/TPHD_English_Logo.png",
-    id: "np30g8vxb625205vl"
   },
   {
     name: "The Legend of Zelda: Skyward Sword HD",
@@ -93,7 +62,6 @@ const games = [
     released_date: "July 16, 2021",
     box_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/b/bd/SSHD_NA_Box_Art.png",
     game_title_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/e/e9/SSHD_English_Logo.png",
-    id: "03kgoçiwnv937gsvx"
   },
   {
     name: "Cadence of Hyrule: Crypt of the NecroDancer feat. The Legend of Zelda",
@@ -103,7 +71,6 @@ const games = [
     released_date: "June 13, 2019",
     box_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/f/fb/CoH_NA_Box_Art.png",
     game_title_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/d/d5/CoH_English_Logo.png",
-    id: "004uj28fmbh72jcps2"
   },
   {
     name: "Hyrule Warriors: Definitive Edition",
@@ -113,17 +80,6 @@ const games = [
     released_date: "May 18, 2018",
     box_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/0/0a/HWDE_NA_Box_Art.png",
     game_title_img: "https://static.wikia.nocookie.net/zelda_gamepedia_en/images/8/8c/HWDE_English_Logo.png",
-    id: "0b20hh10fu1gfm5vdd24"
   },
   
 ];
-
-async function seedGames() {
-  try {
-    await Game.insertMany(games);
-    console.log('Dados inseridos com sucesso!');
-    mongoose.disconnect();
-  } catch (error) {
-    console.error('Erro ao inserir dados:', error);
-  }
-}

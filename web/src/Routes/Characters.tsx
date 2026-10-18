@@ -15,9 +15,9 @@ const Characters = () => {
     useEffect(() => { setQuery(params.get('q') ?? ''); }, [params]);
     useEffect(() => { getCharacters().then(setCharacters).catch(() => setCharacters([])); }, []);
 
-    const races = useMemo(() => ['All', ...new Set((characters ?? []).map((c) => c.race))], [characters]);
+    const races = useMemo(() => ['All', ...new Set((characters ?? []).map((c) => c.race ?? 'Unknown'))], [characters]);
     const list = (characters ?? []).filter((c) =>
-        c.name.toLowerCase().includes(query.trim().toLowerCase()) && (race === 'All' || c.race === race));
+        c.name.toLowerCase().includes(query.trim().toLowerCase()) && (race === 'All' || (c.race ?? 'Unknown') === race));
 
     return (
         <main className="page container texture-book">
@@ -38,7 +38,7 @@ const Characters = () => {
 
             <div className="grid">
                 {list.map((character, i) => (
-                    <Link to={`/characters/${character.name}`} className="slate-card character-card" key={character.id || character.name}>
+                    <Link to={`/characters/${character.id}`} className="slate-card character-card" key={character.id}>
                         <div className="frame" />
                         <span className="no">{compendiumNo(i)}</span>
                         <div className="character-pic">
@@ -51,7 +51,7 @@ const Characters = () => {
                         <div className="character-plate">
                             <h3>{character.name}</h3>
                             <div className="character-row">
-                                <span className="pill"><img src={elf} alt="" />{character.race}</span>
+                                <span className="pill"><img src={elf} alt="" />{character.race ?? 'Unknown'}</span>
                                 <span className="character-go"><ArrowIcon /></span>
                             </div>
                         </div>

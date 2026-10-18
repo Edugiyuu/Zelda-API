@@ -8,7 +8,7 @@ import MonsterArt from '../Imgs/Bg/Monster.png'
 import DungeonArt from '../Imgs/Bg/Link2.png'
 import RacesArt from '../Imgs/Bg/Races.png'
 import { ArrowIcon, DiamondIcon } from '../Components/Icons';
-import { compendiumNo, getAllGames, getBosses, getCharacters, getRaces } from '../api';
+import { compendiumNo, getBosses, getCharacters, getGames, getRaces } from '../api';
 
 const count = (promise: Promise<unknown[]>) => promise.then((list) => list.length).catch(() => null);
 
@@ -16,7 +16,7 @@ const SeeMore = () => {
   const [counts, setCounts] = useState<Record<string, number | null>>({});
 
   useEffect(() => {
-    Promise.all([count(getAllGames()), count(getBosses()), count(getCharacters()), count(getRaces())])
+    Promise.all([count(getGames()), count(getBosses()), count(getCharacters()), count(getRaces())])
       .then(([games, bosses, characters, races]) => setCounts({ games, bosses, characters, races }));
   }, []);
 

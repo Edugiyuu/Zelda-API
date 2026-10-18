@@ -1,28 +1,30 @@
-import Game from "../models/Game.js";
+import { prisma } from "../db.js";
+import { toGame } from "./serializers.js";
 
-//app.post('/new/game', async(req,res) =>{
-    export const postGame = async (req,res)=>{
-  const {name} = req.body
+const FIELDS = ['description', 'developer', 'publisher', 'released_date', 'box_img', 'game_title_img'];
 
-  if(!name){
-    return res.status(422).json({msg:'O nome tá vazio'})
+export const postGame = async (req, res) => {
+  const name = typeof req.body?.name === 'string' ? req.body.name.trim() : '';
+
+  if (!name) {
+    return res.status(422).json({ msg: 'O nome do jogo é obrigatório' });
   }
-  //check is game name exist
-  const gameExists = await Game.findOne({name:name})
 
-  if (gameExists) {
-    return res.status(422).json({msg:'O nome tá vazio'})
-  }
-  //criar game
-  const game = new Game({
-    name,
-  })
+  try {
+    const gameExists = await prisma.game.findUnique({ where: { name } });
 
-  try{
-    await game.save()
-    res.status(201).json({msg:'salvo'})
-    
-  }catch(error){
-    res.status(500).json({msg:"error"})
+    if (gameExists) {
+      return res.status(409).json({ msg: 'Já existe um jogo com esse nome' });
+    }
+
+    const data = { name };
+    for (const field of FIELDS) {
+      if (typeof req.body[field] === 'string') data[field] = req.body[field];
+    }
+
+    const game = await prisma.game.create({ data });
+    res.status(201).json(toGame(game));
+  } catch (error) {
+    res.status(500).json({ msg: "Erro ao salvar jogo", error: error.message });
   }
 }
