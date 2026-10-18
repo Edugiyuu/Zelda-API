@@ -1,81 +1,78 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../Styles/SeeMore.css';
-import AliceCarousel from 'react-alice-carousel';
-import 'react-alice-carousel/lib/alice-carousel.css';
+import ZeldaLogo from '../Imgs/Bg/ZeldaLogo.png'
+import BossArt from '../Imgs/Bg/Boss.png'
+import CharactersArt from '../Imgs/Bg/Characters.png'
+import MonsterArt from '../Imgs/Bg/Monster.png'
+import DungeonArt from '../Imgs/Bg/Link2.png'
+import RacesArt from '../Imgs/Bg/Races.png'
+import { ArrowIcon, DiamondIcon } from '../Components/Icons';
+import { compendiumNo, getBosses, getCharacters, getGames, getRaces } from '../api';
+
+const count = (promise: Promise<unknown[]>) => promise.then((list) => list.length).catch(() => null);
 
 const SeeMore = () => {
+  const [counts, setCounts] = useState<Record<string, number | null>>({});
+
+  useEffect(() => {
+    Promise.all([count(getGames()), count(getBosses()), count(getCharacters()), count(getRaces())])
+      .then(([games, bosses, characters, races]) => setCounts({ games, bosses, characters, races }));
+  }, []);
+
+  const tiles = [
+    { title: 'Games', img: ZeldaLogo, to: '/games', count: counts.games },
+    { title: 'Bosses', img: BossArt, to: '/bosses', count: counts.bosses },
+    { title: 'Characters', img: CharactersArt, to: '/characters', count: counts.characters },
+    { title: 'Monsters', img: MonsterArt },
+    { title: 'Dungeons', img: DungeonArt },
+    { title: 'Races', img: RacesArt, to: '/races', count: counts.races },
+  ];
+
   return (
-    <div className='SeeMore'>
-      <h1>Know more about the ZELDA universe</h1>
+    <main className="page container texture-waves">
+      <header className="explore-head">
+        <p className="eyebrow"><DiamondIcon />Explore<DiamondIcon /></p>
+        <p className="explore-small">Know more about the</p>
+        <h1 className="explore-big">Zelda Universe</h1>
+        <p className="page-lead">Pick a chapter of the legend. Each collection is powered by the Hyrule Compendium API.</p>
+        <div className="rule"><span /><DiamondIcon /><span /></div>
+      </header>
 
-      <AliceCarousel
-        
-        autoPlay 
-        autoPlayInterval={1200} 
-        infinite 
-        disableButtonsControls
-        disableDotsControls
-        paddingLeft={0}
-        autoPlayStrategy='none'
-        responsive={{
-         
-          700: { items: 2 }, 
-          1024: { items: 3 },
-
-        }}
-        
-      >
-        <div className='SlideGames'>
-          <Link to={'/games'}>Games <p>VEJA</p></Link>
-          
-        </div>
-        <div className='SlideBosses'>
-          <Link to={'/bosses'}>Bosses</Link>
-        </div>
-        <div className='SlideCharacters'>
-          <Link to={'/characters'}>Characters</Link>
-        </div>
-        <div className='SlideMonsters'>
-          <Link to={'/monsters'}>Monsters</Link>
-        </div>
-        <div className='SlideDungeons'>
-          <Link to={'/dungeons'}>Dungeons</Link>
-        </div>
-        <div className='SlideRaces'>
-          <Link to={'/races'}>Races</Link>
-        </div>
-      </AliceCarousel>
-
-      <div className='Box'>
-        <div className='SideBox'>
-          <div className='SideBox2'>
-            <h2>more bla bla bla bla</h2>
-            <p>BLA BLA BLA BLA BLA</p>
+      <div className="explore-body">
+        <div className="slate-card explore-feature">
+          <div className="frame" />
+          <div className="explore-feature-copy">
+            <p className="eyebrow"><DiamondIcon />Start here</p>
+            <h3>Begin with the hero</h3>
+            <p>Every legend starts with a boy in green. Meet Link and the companions who walk beside him.</p>
+            <Link to="/characters/Link" className="btn btn-gold">Meet Link <ArrowIcon /></Link>
           </div>
         </div>
 
-        <div className='Links'>
-          <div className='BoxGames'>
-            <Link className='Games' to={'/games'}>Games</Link>
-          </div>
-          <div className='BoxBosses'>
-            <Link className='Bosses' to={'/bosses'}>Bosses</Link>
-          </div>
-          <div className='BoxCharacters'>
-            <Link className='Characters' to={'/characters'}>Characters</Link>
-          </div>
-          <div className='BoxMonsters'>
-            <Link className='Monsters' to={'/monsters'}>Monsters</Link>
-          </div>
-          <div className='BoxDungeons'>
-            <Link className='Dungeons' to={'/dungeons'}>Dungeons</Link>
-          </div>
-          <div className='BoxRaces'>
-            <Link className='Races' to={'/races'}>Races</Link>
-          </div>
+        <div className="explore-grid">
+          {tiles.map((tile, i) => {
+            const content = <>
+              <div className="explore-tile-img">
+                <img src={tile.img} alt="" />
+                <span className={`pill ${tile.to ? '' : 'muted'}`}>{tile.to ? 'Available' : 'Coming soon'}</span>
+              </div>
+              <div className="explore-tile-label">
+                <div>
+                  <span className="no">{compendiumNo(i, 2)}</span>
+                  <b>{tile.title}</b>
+                  <span>{tile.to ? `${tile.count ?? '—'} entries` : 'Coming soon'}</span>
+                </div>
+                <span className="explore-tile-arrow"><ArrowIcon /></span>
+              </div>
+            </>;
+            return tile.to
+              ? <Link to={tile.to} className="explore-tile" key={tile.title}>{content}</Link>
+              : <div className="explore-tile soon" key={tile.title}>{content}</div>;
+          })}
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

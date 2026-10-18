@@ -1,4 +1,35 @@
-.RacesBox{
-    display: flex;
-    flex-direction: row;
+.races { margin-top: 40px; }
+.race { border-radius: 18px; background: var(--panel); border: 1px solid var(--line); margin-bottom: 14px; }
+.race.open { border-color: var(--line-gold-strong); }
+.race-head {
+  display: flex; align-items: center; gap: 16px; width: 100%; min-height: 78px; padding: 0 28px;
+  background: none; border: 0; color: inherit; text-align: left; cursor: pointer;
+}
+div.race-head { cursor: default; }
+.race.open .race-head { border-bottom: 1px solid var(--line-soft); }
+.race-head .no { width: 64px; flex: none; }
+.race-head h2 { font-family: var(--font-title); font-size: 24px; font-weight: 700; color: var(--text); }
+.race-chevron { margin-left: auto; width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--line-gold-strong); color: var(--gold); display: flex; align-items: center; justify-content: center; flex: none; }
+.race-chevron svg { width: 14px; height: 14px; }
+.race-count { font-size: 13px; color: var(--muted); }
+.race.upcoming { opacity: 0.55; }
+
+.race-body { display: flex; gap: 36px; padding: 28px; }
+.race-pic {
+  width: 360px; height: 410px; flex: none; border-radius: 16px; display: flex; align-items: flex-end; justify-content: center; overflow: hidden;
+  background: var(--card) url('../Imgs/Bg/BookIcon.png') no-repeat center 26px / 210px auto; border: 1px solid var(--line);
+}
+.race-pic img { height: 370px; object-fit: contain; }
+.race-text p { color: var(--text-soft); font-size: 15px; line-height: 1.8; }
+.race-facts { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; margin-top: 22px; }
+.fact-long { font-size: 14px !important; font-weight: 300 !important; line-height: 1.5; }
+.race-members { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.race-members .pill:hover { border-color: var(--gold); }
+
+@media (max-width: 900px) {
+  .race-head { flex-wrap: wrap; padding: 18px 20px; gap: 10px 14px; }
+  .race-head .no { width: auto; }
+  .race-body { flex-direction: column; padding: 20px; }
+  .race-pic { width: 100%; }
+  .race-facts { grid-template-columns: 1fr; }
 }

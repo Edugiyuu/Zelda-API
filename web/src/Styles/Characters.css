@@ -1,101 +1,16 @@
-.SeeCharacters{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px;
+.character-card {
+  display: block; height: 414px;
+  background-size: 156px auto; background-position: center 44px;
+  transition: transform 0.25s ease, border-color 0.25s ease;
 }
-
-.CharacterTitle {
-    
-    font-family: 'HyliaSerif', sans-serif;
-    letter-spacing: 3px;
-    color: #515555;   
-    font-weight: normal;
-    font-size: 70px;
-
-  }
-  .CharacterCard {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 20px;
-    width: 240px;
-    height: 420px;
-    background-color: #1d1b1b;
-    border-radius: 20px;
-    color: #f7f7f7;
-    box-shadow: 0px 0px 3px 0px#515555;
-    justify-content: space-between;
-    background-image: url('../Imgs/Bg/BookIcon.png');
-    background-size: 190px;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.CharacterCard div{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-   
-}
-.CharacterLink {
-    background-color: #b5a54d ;
-    color: white;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    border-bottom-right-radius: 17px;
-    border-bottom-left-radius: 17px;
-    
-    width: 200px;
-    text-align: center;
-}
-.CharacterCard img{
-    max-height: 200px;
-}
-.CharactersRaces{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #c0b763d0;
-    border-radius: 30px;
-    padding: 10px;
-    width: 120px;
-    gap: 5px;
-    color: white;
-}
-.CharactersRaces img{
-    width: 35px;
-}
-.Search{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 40px;
-  
-}
-.Search input{
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border: 1px solid #b1a751;
-    border-right: none;
-    width: 40%;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-.Search button{
-    padding: 20px;
-    border: 1px solid #b1a751;
-   /*  border-left: none; */
-    color: #515555;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    background-color: white;
-    margin-bottom: 20px;
-}
+.character-card:hover { transform: translateY(-4px); border-color: var(--line-gold-strong); }
+.character-card .no { position: absolute; left: 22px; top: 22px; }
+.character-pic { position: absolute; left: 16px; right: 16px; top: 44px; height: 210px; display: flex; align-items: center; justify-content: center; }
+.character-pic img { max-height: 200px; max-width: 100%; object-fit: contain; transition: transform 0.3s ease; }
+.character-card:hover .character-pic img { transform: scale(1.05); }
+.character-plate { position: absolute; left: 16px; right: 16px; bottom: 16px; padding: 14px; border-radius: 10px; background: var(--plate); border: 1px solid var(--line); }
+.character-plate h3 { font-family: var(--font-title); font-size: 18px; font-weight: 700; color: var(--text); line-height: 1.25; }
+.character-row { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; }
+.character-row .pill { padding-left: 6px; }
+.character-go { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--line-gold-strong); color: var(--gold); display: flex; align-items: center; justify-content: center; }
+.character-go svg { width: 14px; height: 14px; }

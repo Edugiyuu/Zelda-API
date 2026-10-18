@@ -1,63 +1,89 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 import '../Styles/Character.css'
-import AliceCarousel from 'react-alice-carousel';
-import "react-alice-carousel/lib/alice-carousel.css";
-import elf from '../Imgs/Races/elf.png'
+import elf from '../Imgs/Races/elf3.png'
+import { ChevronIcon, DiamondIcon } from '../Components/Icons';
+import { Character as CharacterData, characterImage, getCharacter, getCharacters } from '../api';
 
-interface Character {
-    name: string,
-    age: string,
-    description: string,
-    gender: string,
-    id: string,
-    race: string,
-    visuals: [string]
-}
+const BIO_PREVIEW = 600;
 
 const Character = () => {
-    const params = useParams();
-    var [character, setCharacter] = useState<Character>()
+    const { character_id = '' } = useParams();
+    const [character, setCharacter] = useState<CharacterData | null>();
+    const [others, setOthers] = useState<CharacterData[]>([]);
+    const [selected, setSelected] = useState<string>();
+    const [expanded, setExpanded] = useState(false);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/character/${params.character_name}`)
-            .then((response) => response.json())
-            .then((parsedResponse) => {
-                console.log(parsedResponse);
-                setCharacter(parsedResponse)
+        setCharacter(undefined); setSelected(undefined); setExpanded(false);
+        getCharacter(character_id).then(setCharacter).catch(() => setCharacter(null));
+    }, [character_id]);
+    useEffect(() => { getCharacters().then(setOthers).catch(() => setOthers([])); }, []);
 
-            })
-    }, []);
+    if (!character) {
+        return <main className="page container"><p className="loading">{character === undefined ? 'Consulting the Sheikah Slate…' : 'This character could not be found.'}</p></main>;
+    }
+
+    const portrait = selected ?? characterImage(character);
+    const related = [
+        ...others.filter((c) => c.id !== character.id && c.race_id === character.race_id),
+        ...others.filter((c) => c.id !== character.id && c.race_id !== character.race_id),
+    ].slice(0, 5);
+    const bio = expanded || character.description.length <= BIO_PREVIEW ? character.description : `${character.description.slice(0, BIO_PREVIEW)}…`;
+    const facts = [['Race', character.race], ['Gender', character.gender], ['Age', character.age]];
+
     return (
-        <div >
-            {character &&
-                <div key={character.id} className="CharacterInfo">
-                    <div className='CharacterImgs'>
-
-                        <AliceCarousel infinite disableButtonsControls autoPlayStrategy='none' autoPlay autoPlayInterval={2500}>
-                            {character.visuals.map((visual) => (
-                                <img src={visual} className="sliderimg" />
+        <main className="page container">
+            <nav className="crumbs"><Link to="/characters">Characters</Link><ChevronIcon /><b>{character.name}</b></nav>
+            <div className="profile">
+                <div className="slate-card profile-slate">
+                    <div className="frame" />
+                    <img
+                        className="profile-main"
+                        src={portrait}
+                        alt={character.name}
+                        onError={(e) => { if (character.visuals[0] && e.currentTarget.src !== character.visuals[0]) e.currentTarget.src = character.visuals[0]; }}
+                    />
+                    {character.visuals.length > 0 && (
+                        <div className="profile-thumbs">
+                            {character.visuals.slice(0, 4).map((visual) => (
+                                <button key={visual} className={`profile-thumb ${visual === selected ? 'on' : ''}`} onClick={() => setSelected(visual)} aria-label={`Show ${character.name} artwork`}>
+                                    <img src={visual} alt="" />
+                                </button>
                             ))}
-                        </AliceCarousel>
-
-                    </div>
-
-                    <div>
-
-                    </div>
-                    <div className='AboutCharacter'>
-                        <h1>{character.name}</h1>
-                        <p>Age: {character.age}</p>
-                        <p>Race: <Link className='CharacterRace' to="/races">{character.race} <img src={elf} alt="" /></Link></p>
-                        <p>Gender: {character.gender}</p>
-                        <p>{character.description}</p>
-                    </div>
+                        </div>
+                    )}
                 </div>
 
-            }
-
-        </div>
-
+                <section className="profile-sheet">
+                    <p className="eyebrow"><DiamondIcon />Character profile</p>
+                    <h1>{character.name}</h1>
+                    <div className="facts">
+                        {facts.map(([label, value]) => (
+                            <div className="fact" key={label}><span>{label}</span>
+                                <b>{label === 'Race' && <img src={elf} alt="" />}{label === 'Race' && value ? <Link to="/races">{value}</Link> : value || 'Unknown'}</b>
+                            </div>
+                        ))}
+                    </div>
+                    <h4><DiamondIcon />Biography</h4>
+                    <p className="profile-bio">{bio}</p>
+                    {character.description.length > BIO_PREVIEW && (
+                        <button className="read-more" onClick={() => setExpanded(!expanded)}>{expanded ? 'Show less' : 'Read more'}</button>
+                    )}
+                    {related.length > 0 && <>
+                        <h4><DiamondIcon />Related characters</h4>
+                        <div className="related-characters">
+                            {related.map((c) => (
+                                <Link to={`/characters/${c.id}`} className="related-character" key={c.id}>
+                                    <img src={characterImage(c)} alt="" onError={(e) => { if (c.visuals[0] && e.currentTarget.src !== c.visuals[0]) e.currentTarget.src = c.visuals[0]; }} />
+                                    <b>{c.name}</b>
+                                </Link>
+                            ))}
+                        </div>
+                    </>}
+                </section>
+            </div>
+        </main>
     )
 }
 

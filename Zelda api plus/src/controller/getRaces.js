@@ -1,11 +1,12 @@
-import Race from "../models/Race.js";
+import { prisma } from "../db.js";
+import { raceInclude, toRace } from "./serializers.js";
 
 export const getRaces = async (req, res) => {
   try {
-    const races = await Race.find(); 
-  
-    res.json(races); 
+    const races = await prisma.race.findMany({ include: raceInclude, orderBy: { id: 'asc' } });
+
+    res.json(races.map(toRace));
   } catch (error) {
-    res.status(500).json({ msg: "Erro", error: error.message });
+    res.status(500).json({ msg: "Erro ao buscar raças", error: error.message });
   }
 }

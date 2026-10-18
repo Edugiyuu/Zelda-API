@@ -1,61 +1,64 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import "../Styles/Characters.css"
-import "../Styles/mobile/Characters.css"
 import elf from "../Imgs/Races/elf3.png"
-
-interface CharactersNames {
-    name: string
-    visuals: string
-    id: string
-    race:string
-}
+import PageHead from "../Components/PageHead";
+import { ArrowIcon, SearchIcon } from "../Components/Icons";
+import { Character, characterImage, compendiumNo, getCharacters } from "../api";
 
 const Characters = () => {
-    var [characters, setCharacters] = useState<CharactersNames[]>([])
+    const [params, setParams] = useSearchParams();
+    const [characters, setCharacters] = useState<Character[] | null>(null);
+    const [query, setQuery] = useState(params.get('q') ?? '');
+    const [race, setRace] = useState('All');
 
-    useEffect(() => {
-        fetch(`http://localhost:3000/characters`)
-            .then((response) => response.json())
-            .then((parsedResponse) => {
-                const characterNames = [];
+    useEffect(() => { setQuery(params.get('q') ?? ''); }, [params]);
+    useEffect(() => { getCharacters().then(setCharacters).catch(() => setCharacters([])); }, []);
 
-                for (let i = 0; i < parsedResponse.length; i++) {
-                    /* console.log(parsedResponse[i]); */
-                    characterNames.push(parsedResponse[i]);
-                }
+    const races = useMemo(() => ['All', ...new Set((characters ?? []).map((c) => c.race ?? 'Unknown'))], [characters]);
+    const list = (characters ?? []).filter((c) =>
+        c.name.toLowerCase().includes(query.trim().toLowerCase()) && (race === 'All' || (c.race ?? 'Unknown') === race));
 
-                setCharacters(characterNames)
-
-            })
-    }, []);
     return (
-        <div>
-        <h1 className='CharacterTitle'style={{textAlign:'center'}}>Characters</h1>
-            <div className="Search">
-                <input type="text" placeholder="Search for a character" />
-                <button>Search</button>
+        <main className="page container texture-book">
+            <PageHead eyebrow="Heroes & legends" title="Characters" lead="The heroes, sages, fairies and villains whose fates are bound to the Triforce." />
+
+            <div className="toolbar">
+                <form className="searchbox" onSubmit={(e) => { e.preventDefault(); setParams(query ? { q: query } : {}); }}>
+                    <label><SearchIcon /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search for a character…" /></label>
+                    <button type="submit">Search</button>
+                </form>
+                <div className="chips">
+                    {races.map((r) => <button key={r} className={`chip ${r === race ? 'on' : ''}`} onClick={() => setRace(r)}>{r}</button>)}
+                </div>
             </div>
 
-            <div className="SeeCharacters">
-                {characters && characters.map((character) => (
-                    <div key={character.name} className="CharacterCard">
-                        <div>
-                            <h2>{character.name}</h2>
-                        {/* <img src={`/Characters/${character.name}.png` || character.visuals[0] } alt="" /> */}
-                        <img
-                            src={`/Characters/${character.name}.png`}
-                            alt={character.name}
-                            onError={(erro) => erro.currentTarget.src = character.visuals[0]}
-                        />
+            {!characters && <p className="loading">Consulting the Sheikah Slate…</p>}
+            {characters && list.length === 0 && <p className="empty">No character found.</p>}
+
+            <div className="grid">
+                {list.map((character, i) => (
+                    <Link to={`/characters/${character.id}`} className="slate-card character-card" key={character.id}>
+                        <div className="frame" />
+                        <span className="no">{compendiumNo(i)}</span>
+                        <div className="character-pic">
+                            <img
+                                src={characterImage(character)}
+                                alt={character.name}
+                                onError={(e) => { if (character.visuals[0] && e.currentTarget.src !== character.visuals[0]) e.currentTarget.src = character.visuals[0]; }}
+                            />
                         </div>
-                        
-                        <Link className="CharactersRaces"to={`/characters/${character.name}`} >{character.race} <img src={elf} alt="" /></Link>
-                        <Link className="CharacterLink" to={`/characters/${character.name}`}>See Character</Link>                      
-                    </div>
+                        <div className="character-plate">
+                            <h3>{character.name}</h3>
+                            <div className="character-row">
+                                <span className="pill"><img src={elf} alt="" />{character.race ?? 'Unknown'}</span>
+                                <span className="character-go"><ArrowIcon /></span>
+                            </div>
+                        </div>
+                    </Link>
                 ))}
             </div>
-        </div>
+        </main>
     )
 }
 

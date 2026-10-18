@@ -1,58 +1,30 @@
-.GameInfo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.game-hero {
+  padding-bottom: 120px;
+  background:
+    linear-gradient(180deg, rgba(var(--bg-rgb), 0.0) 60%, var(--bg) 100%),
+    linear-gradient(90deg, rgba(var(--bg-rgb), 0.98) 0%, rgba(var(--bg-rgb), 0.65) 45%, rgba(var(--bg-rgb), 0.41) 100%),
+    url('../Imgs/Bg/ZeldaHome1.jpg') center / cover;
 }
-
-.GameImgs {
-
-    display: flex;
-    max-width: 400px;
-    width: 10000px;
-    perspective: 600px;
-    flex-direction: column;
-    align-items: center;
-    gap: 50px;
-    margin-left: 20px;
-    border-radius: 20px;
-    
+.game-detail { display: flex; gap: 64px; margin-top: 44px; align-items: flex-start; }
+.game-boxart { position: relative; width: 400px; flex: none; }
+.game-boxart > img:first-child {
+  display: block; width: 100%; aspect-ratio: 400 / 560; object-fit: cover; border-radius: 18px; border: 1px solid rgba(212, 189, 111, 0.5);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 60px rgba(212, 189, 111, 0.15);
 }
-
-.GameTitleLogo {
-    max-width: 200px;
+.game-info { flex: 1; min-width: 0; }
+.game-title-logo { height: 120px; max-width: 100%; object-fit: contain; filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.6)); }
+.game-info h1 { font-family: var(--font-title); font-size: clamp(30px, 4vw, 44px); font-weight: 700; line-height: 1.15; margin: 18px 0 26px; }
+.game-info .fact { background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.09); }
+.game-about {
+  margin-top: 18px; padding: 28px 30px; border-radius: 18px; background: rgba(33, 65, 76, 0.78);
+  border: 1px solid rgba(212, 189, 111, 0.22); backdrop-filter: blur(14px); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
 }
+.game-about h4 { font-family: var(--font-title); font-size: 18px; color: var(--gold); font-weight: 700; margin-bottom: 12px; }
+.game-about p { color: #E0E7E5; font-size: 16px; line-height: 1.75; }
+.game-actions { display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap; }
+.related-games .covers { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
 
-.BoxArt {
-    width: 255px;
-    transform-style: preserve-3d;
-    animation: rotate3D 4s infinite linear;
-    border-radius: 5px;
-    box-shadow: 0 0 30px 0px rgba(0, 0, 0, 0.363); 
-    transition: box-shadow 0.3s ease-in-out; 
-   
-}
-
-@keyframes rotate3D {
-    0% {
-        transform: rotateY(0deg);
-    }
-
-    100% {
-        transform: rotateY(360deg);
-    }
-}
-
-.About {
-    display: flex;
-    margin: 20px;
-    flex-direction: column;
-    margin-left: 60px;
-    justify-items: center;
-    padding: 20px;
-    background-color: rgb(252, 252, 252);
-    color: rgb(0, 0, 0);
-    border-radius: 20px;
-    box-shadow: 0px 1px 2px 0px #7f8c8d;
-    color: #515555;
-
+@media (max-width: 900px) {
+  .game-detail { flex-direction: column; gap: 32px; }
+  .game-boxart { width: min(320px, 100%); }
 }

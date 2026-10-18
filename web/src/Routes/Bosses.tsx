@@ -1,70 +1,86 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import '../Styles/Bosses.css'
-import { Link } from "react-router-dom";
-import axios from "axios";
+import Guardian from '../Imgs/Bg/Boss.png'
+import { DiamondIcon, SearchIcon } from "../Components/Icons";
+import { Boss, compendiumNo, getBosses } from "../api";
 
-interface Bosses {
-    id: string
-    name: string
-    released_date: string
-    game_title_img?: string
-}
+const PAGE_SIZE = 15;
 
 const Bosses = () => {
-    var [games, setGames] = useState<Bosses[]>([])
-    var [newGames, setNewGames] = useState<Bosses[]>([])
+    const [params, setParams] = useSearchParams();
+    const [bosses, setBosses] = useState<Boss[] | null>(null);
+    const [noArt, setNoArt] = useState<number[]>([]);
+    const [query, setQuery] = useState(params.get('q') ?? '');
+    const [sort, setSort] = useState('az');
+    const [shown, setShown] = useState(PAGE_SIZE);
 
-
+    useEffect(() => { setQuery(params.get('q') ?? ''); }, [params]);
     useEffect(() => {
-        fetch(`https://zelda.fanapis.com/api/bosses?limit=100`)
-            .then((response) => response.json())
-            .then((parsedResponse) => {
-                const NomesExcluidos = ["Agitha", "Glutko","Princess Zelda", "Mazura","Big Liar","Midna","Moldorm","Big Pengator"];
-                const filteredBosses = parsedResponse.data.filter((boss: { name: string; }) => {
-                   //mostra só os nomes e
-                    return !NomesExcluidos.includes(boss.name);
-                });
-                console.log(filteredBosses);
-                setGames(filteredBosses);
-            });
+        getBosses().then(setBosses).catch(() => setBosses([]));
     }, []);
-    
-    
+
+    const list = useMemo(() => (bosses ?? [])
+        .filter((b) => !noArt.includes(b.id) && b.name.toLowerCase().includes(query.trim().toLowerCase()))
+        .sort((a, b) => sort === 'az' ? a.name.localeCompare(b.name) : sort === 'za' ? b.name.localeCompare(a.name) : b.games.length - a.games.length),
+        [bosses, noArt, query, sort]);
+
+    useEffect(() => { setShown(PAGE_SIZE); }, [query, sort]);
 
     return (
-        <div >
-
-            <h1 className="BossTitle">Fearsome Bosses of Hyrule.</h1>
-
-            <div className="AllBosses">
-                {games && games.map((game) => (
-                    <div key={game.id} className="BossCard">
-                        <h2>{game.name}</h2>
-                        <p>{game.released_date}</p>
-                        <img
-                            style={{ width: '150px' }}
-                            src={`/Bosses/${game.name}.png`}
-
-                        />
-                        <Link className="BossCardLink" to={`/games/${game.id}`}>See Game</Link>
-
+        <main className="page">
+            <section className="boss-hero">
+                <div className="container boss-hero-inner">
+                    <img className="boss-guardian" src={Guardian} alt="" />
+                    <div className="boss-copy">
+                        <p className="eyebrow red"><DiamondIcon />Bestiary</p>
+                        <h1><span className="red-text">Fearsome Bosses of Hyrule</span></h1>
+                        <p className="page-lead">Guardians, phantoms and blights. Study every foe that ever stood between the hero and the Triforce.</p>
                     </div>
-                ))}
-                {newGames && newGames.map((game) => (
-                    <div key={game.id} className="BossCard">
-                        <h3>{game.name}</h3>
-                        <p>{game.released_date}</p>
-                        <img
-                            src={game.game_title_img}
+                </div>
+            </section>
 
-                        />
-                        <Link className="BossCardLink" to={`/games/${game.id}`}>See Game</Link>
+            <div className="container">
+                <div className="toolbar">
+                    <form className="searchbox" onSubmit={(e) => { e.preventDefault(); setParams(query ? { q: query } : {}); }}>
+                        <label><SearchIcon /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search for a boss…" /></label>
+                        <button type="submit">Search</button>
+                    </form>
+                    <label className="select">Sort by
+                        <select value={sort} onChange={(e) => setSort(e.target.value)}>
+                            <option value="az">Name (A–Z)</option>
+                            <option value="za">Name (Z–A)</option>
+                            <option value="appearances">Most appearances</option>
+                        </select>
+                    </label>
+                </div>
 
+                {!bosses && <p className="loading">Sensing malice…</p>}
+                {bosses && list.length === 0 && <p className="empty">No boss found.</p>}
+
+                <div className="grid">
+                    {list.slice(0, shown).map((boss, i) => (
+                        <article className="boss-card" key={boss.id}>
+                            <div className="boss-art">
+                                <img src={`/Bosses/${boss.name}.png`} alt={boss.name} loading="lazy" onError={() => setNoArt((ids) => [...ids, boss.id])} />
+                            </div>
+                            <div className="boss-body">
+                                <span className="no">{compendiumNo(i)}</span>
+                                <h3>{boss.name}</h3>
+                                <span className="pill red">{Math.max(1, boss.games.length)} game{boss.games.length > 1 ? 's' : ''}</span>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+
+                {list.length > 0 && (
+                    <div className="more-row">
+                        <span>Showing {Math.min(shown, list.length)} of {list.length} bosses</span>
+                        {shown < list.length && <button className="btn btn-dark" onClick={() => setShown(shown + PAGE_SIZE)}>Load more bosses</button>}
                     </div>
-                ))}
+                )}
             </div>
-
-        </div>
+        </main>
     )
 }
 
